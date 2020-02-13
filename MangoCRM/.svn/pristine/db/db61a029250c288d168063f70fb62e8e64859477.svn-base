@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bss">
+
+<select id="getBssList" parameterType="hashmap" resultType="hashmap">
+	SELECT *
+	FROM BSS_CHN BC INNER JOIN LEAD L
+						ON BC.LEAD_NO = L.LEAD_NO
+					INNER JOIN CLIENT C
+						ON L.CLIENT_NO = C.CLIENT_NO
+					INNER JOIN COMP CP
+						ON C.COMP_NO = CP.COMP_NO
+					INNER JOIN EMP_INFO EI
+						ON L.EMP_NO = EI.EMP_NO
+					INNER JOIN CHN_PROD CPD
+						ON BC.CHN_NO = CPD.CHN_NO
+</select>
+
+</mapper>

@@ -1,0 +1,32 @@
+package com.smart.mango.web.inside.controller;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.smart.mango.common.service.IPagingService;
+import com.smart.mango.web.inside.service.IBssService;
+
+@Controller
+public class BssController {
+
+	@Autowired  
+	public IBssService IBssService;
+	@Autowired
+	public IPagingService iPagingService;
+	
+	@RequestMapping(value="/bssMain")
+	public ModelAndView main(HttpSession session,@RequestParam HashMap<String,String> params,
+								ModelAndView mav) throws Throwable {
+		mav.setViewName("bss/bssMain");
+		return mav;
+	}
+	
+}

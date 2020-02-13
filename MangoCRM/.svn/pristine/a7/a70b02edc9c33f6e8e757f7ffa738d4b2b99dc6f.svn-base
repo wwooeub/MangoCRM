@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="depart">
+<select id="getSuch" parameterType="hashmap" resultType="hashmap">
+	SELECT *
+	FROM DEPART D INNER JOIN TEAM T
+					ON D.DEPART_NO = T.DEPART_NO
+				  INNER JOIN EMP_INFO EI
+					ON T.TEAM_NO = EI.TEAM_NO
+				  INNER JOIN AUTHOR A
+					ON EI.AUTHOR_NO = A.AUTHOR_NO
+				  INNER JOIN EMP_POSI EP
+					ON EI.EMP_POSI_NO = EP.EMP_POSI_NO
+			<if test="searchTxt != null and searchTxt !=''">
+				<choose>
+					<when test="searchGbn2 eq 0">
+						WHERE A.AUTHOR_NO = 2 OR A.AUTHOR_NO = 4 
+						AND (EMP_NAME LIKE '%' ||  #{searchTxt} || '%')
+						OR (DEPART_NAME LIKE '%' ||  #{searchTxt} || '%'
+						AND TEAM_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+					<when test="searchGbn2 eq 1">
+						WHERE A.AUTHOR_NO = 4 
+						AND (EMP_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+					<when test="searchGbn2 eq 2">
+						WHERE A.AUTHOR_NO = 4 
+						AND (DEPART_NAME LIKE '%' ||  #{searchTxt} || '%'
+						AND TEAM_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+					<when test="searchGbn2 eq 3">
+						WHERE A.AUTHOR_NO = 2  
+						AND (EMP_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+					<when test="searchGbn2 eq 4">
+						WHERE A.AUTHOR_NO = 2 
+						AND (DEPART_NAME LIKE '%' ||  #{searchTxt} || '%'
+						AND TEAM_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+				</choose>
+			</if>
+</select>
+
+<select id="getDepartList" parameterType="hashmap" resultType="hashmap">
+	select S1.DEPART_NAME, S1.PEOPLE, EI1.EMP_NAME
+from(SELECT D.DEPART_NO,D.DEPART_NAME, COUNT(*) AS PEOPLE
+FROM DEPART D INNER JOIN TEAM T
+ON D.DEPART_NO = T.DEPART_NO
+INNER JOIN EMP_INFO EI
+ON T.TEAM_NO = EI.TEAM_NO
+INNER JOIN EMP_POSI EP
+ON EI.EMP_POSI_NO = EP.EMP_POSI_NO
+INNER JOIN AUTHOR A
+ON EI.AUTHOR_NO = A.AUTHOR_NO
+GROUP BY D.DEPART_NO, D.DEPART_NAME)S1 inner join TEAM T1
+                ON S1.DEPART_NO = T1.DEPART_NO
+                        INNER JOIN EMP_INFO EI1
+                ON T1.TEAM_NO = EI1.TEAM_NO
+                        INNER JOIN EMP_POSI EP1
+                ON EI1.EMP_POSI_NO = EP1.EMP_POSI_NO
+WHERE EP1.EMP_POSI_NO = 4
+</select>
+
+<select id="getTeamList" parameterType="hashmap" resultType="hashmap">
+select S1.TEAM_NAME, S1.PEOPLE, EI1.EMP_NAME
+FROM(SELECT EI.TEAM_NO, COUNT(*) AS PEOPLE, D.DEPART_NO, T.TEAM_NAME
+FROM DEPART D INNER JOIN TEAM T
+ON D.DEPART_NO = T.DEPART_NO
+INNER JOIN EMP_INFO EI
+ON T.TEAM_NO = EI.TEAM_NO
+INNER JOIN EMP_POSI EP
+ON EI.EMP_POSI_NO = EP.EMP_POSI_NO
+INNER JOIN AUTHOR A
+ON EI.AUTHOR_NO = A.AUTHOR_NO
+GROUP BY EI.TEAM_NO, D.DEPART_NO, T.TEAM_NAME
+ORDER BY EI.TEAM_NO)S1 inner join TEAM T1
+                ON S1.TEAM_NO = T1.TEAM_NO
+                        INNER JOIN EMP_INFO EI1
+                ON t1.teammgr_no = EI1.EMP_NO
+</select>
+</mapper>

@@ -1,0 +1,9 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+
+public interface IScheDao {
+
+	void insertSche(HashMap<String, String> params) throws Throwable;
+
+}

@@ -1,0 +1,44 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class LeadDao implements ILeadDao {
+	@Autowired
+	public SqlSession sqlSession;
+
+	@Override
+	public List<HashMap<String, String>> getLeadlist(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("lead.getLeadlist", params);
+	}
+
+	@Override
+	public int getleadCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("lead.getleadCnt", params);
+	}
+
+	@Override
+	public void editLs(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		sqlSession.update("lead.editLs", params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getclientList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("lead.getclientList", params);
+	}
+
+	@Override
+	public int getpopCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("lead.getpopCnt", params);
+	}
+}

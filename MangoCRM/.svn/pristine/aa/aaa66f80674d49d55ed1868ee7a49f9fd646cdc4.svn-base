@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="grade">
+	<select id="getGrade" parameterType="hashmap" resultType="hashmap">
+		SELECT RANK() OVER(ORDER BY G.CC_GRADE_NO DESC) AS RNK, G.CC_GRADE_NO, G.CC_GRADE_NAME, G.CC_GRADE_COLOR, C.CNT
+		FROM( SELECT CC_GRADE_NO, COUNT(*) AS CNT
+		      FROM COMP
+		      GROUP BY CC_GRADE_NO) C INNER JOIN COMP_CLIENT_GRADE G
+		                                      ON C.CC_GRADE_NO = G.CC_GRADE_NO
+	</select>
+	
+	<update id="editGrade" parameterType="hashmap">
+		UPDATE COMP_CLIENT_GRADE SET CC_GRADE_COLOR = #{gradeColor}<if test="gradeNm != null and gradeNm != ''">, CC_GRADE_NAME = #{gradeNm}</if>
+		WHERE CC_GRADE_NO = #{gradeNo}
+	</update>
+	
+	<delete id="delGrade" parameterType="hashmap">
+		DELETE COMP_CLIENT_GRADE
+		WHERE CC_GRADE_NO = #{gradeNo}
+	</delete>
+	
+	<insert id="insertGrade" parameterType="hashmap">
+		INSERT INTO COMP_CLIENT_GRADE (CC_GRADE_NO, CC_GRADE_NAME, CC_GRADE_COLOR)
+		VALUES(#{gradeNo}, #{gradeNm}, #{gradeColor})
+	</insert>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bssPps">
+<insert id="insertBssPpsAdd" parameterType="hashmap">
+INSERT INTO BSS_PPS(PPS_NO, MGR_NO, EMP_NO, DEPART_NO, PPS_NAME, PPS_SALES, PPS_YEAR) 
+			VALUES(BSS_PPS_SEQ.NEXTVAL, 1, , #{pps_name}, #{pps_sales}, #{pps_year},  )
+</insert>
+<select id="getBssPpsCnt" parameterType="hashmap" resultType="Integer">
+SELECT COUNT(*) AS CNT
+FROM BSS_PPS B INNER JOIN EMP_INFO E1
+								ON B.MGR_NO = E1.EMP_NO
+					INNER JOIN EMP_INFO E2
+								ON B.EMP_NO = E2.EMP_NO
+                    INNER JOIN TEAM T
+                            	ON E1.TEAM_NO = T.TEAM_NO
+					INNER JOIN DEPART D
+                        		ON T.DEPART_NO = D.DEPART_NO
+WHERE PPS_DEL_YN = 1
+	<if test="searchTxt != null and searchTxt != ''">
+	<choose>
+		<!-- 적요명 -->
+		<when test="searchGbn eq 0">
+			AND B.PPS_NAME LIKE '%' || #{searchTxt} || '%'
+		</when>
+		<!-- 등록자 -->
+		<when test="searchGbn eq 1">
+			AND E2.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+		</when>
+		<!-- 담당자 -->
+		<when test="searchGbn eq 2">
+			AND E1.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+		</when>
+	</choose>
+</if>
+</select>
+<select id="getBssPpsList" parameterType="hashmap" resultType="hashmap">
+SELECT S1.*
+FROM(SELECT B.PPS_NO, B.PPS_NAME, B.PPS_SALES, B.PPS_YEAR, TO_CHAR(B.PPS_DATE, 'YYYY-MM-DD') AS PPS_DATE, D.DEPART_NAME,
+	 E1.EMP_NAME AS MGR_NAME, E2.EMP_NAME AS EMP_NAME, E2.EMP_EMAIL AS MGR_EMAIL, ROW_NUMBER() OVER(ORDER BY B.PPS_NO DESC) AS RNUM
+	 FROM BSS_PPS B INNER JOIN EMP_INFO E1
+								ON B.MGR_NO = E1.EMP_NO
+					INNER JOIN EMP_INFO E2
+								ON B.EMP_NO = E2.EMP_NO
+                    INNER JOIN TEAM T
+                            	ON E1.TEAM_NO = T.TEAM_NO
+					INNER JOIN DEPART D
+                        		ON T.DEPART_NO = D.DEPART_NO
+	 WHERE PPS_DEL_YN = 1
+	<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<!-- 적요명 -->
+				<when test="searchGbn eq 0">
+					AND B.PPS_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<!-- 등록자 -->
+				<when test="searchGbn eq 1">
+					AND E2.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<!-- 담당자 -->
+				<when test="searchGbn eq 2">
+					AND E1.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		) S1
+		WHERE S1.RNUM BETWEEN #{startCnt} AND #{endCnt}
+</select>
+</mapper>

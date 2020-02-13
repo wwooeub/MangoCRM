@@ -1,0 +1,281 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>등급목록</title>
+<c:import url="/header"></c:import>
+<link rel="stylesheet" type="text/css" href="resources/css/grade/grade.css" />
+<script src="resources/script/highcharts/highcharts.js"></script>
+<script src="resources/script/highcharts/modules/exporting.js"></script>
+<script type="text/javascript">
+var gradeLeng;
+var chart = new Array();
+$(document).ready(function() {
+	reloadGrade();
+	
+	$("#gradeChangeBtn").on("click", function() {
+		location.href = "gradeChange";
+	});
+	
+	$("#gradeEditBtn").on("click", function() {
+		location.href = "gradeEdit";
+	});
+	
+	$(".grade_srch_btn").on("click", function() {
+		
+	});
+});
+
+function reloadGrade() {
+	$.ajax({
+		type: "post",
+		url: "getGradeAjax",
+		dataType: "json",
+		success: function(result) {
+			redrawGrade(result.grade);
+			redrawChart(result.grade);
+		}
+	});
+}
+
+function redrawGrade(grade) {
+	var html = "";
+	var sum = 0;
+	gradeLeng = grade.length;
+	
+	for(var i in grade){
+		sum += grade[i].CNT;		
+	}
+	for(var i in grade){
+		html += "<div class=\"grade\">";
+		html += "<div class=\"grade_color\" style=\"background-color:" + grade[i].CC_GRADE_COLOR + "\"></div>";
+		html += "<div class=\"grade_name\">" + grade[i].CC_GRADE_NAME + "</div>";
+		html += "<div class=\"grade_per\">" + grade[i].CNT / sum +"</div>";
+		html += "<div class=\"grade_count\">(" + grade[i].CNT  + ")</div>";
+		html += "</div>";		
+	}
+	
+	$(".grade_chart_list").html(html);
+}
+
+function redrawChart(grade) {
+	for(var i=0; i < grade.length; i++){
+		chart[i] = {
+			name : grade[i].CC_GRADE_NAME,
+			y : grade[i].CNT,
+			color : grade[i].CC_GRADE_COLOR
+		}
+	}
+	
+	$("#grade_chart").highcharts({
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie',
+	        height: '300'
+	    },
+	    title: {
+	        text: ''
+	    },
+	    tooltip: {
+	        pointFormat: '<b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: false
+	            },
+	            showInLegend: false
+	        }
+	    },
+	    series: [{
+	        data: chart
+	    }]
+	});
+	
+	$("tspan").each(function(){
+		if($(this).html() == "Highcharts.com") {
+			$(this).remove();
+		}
+	});
+	
+	$("g").each(function(){
+		if($(this).attr("class") == "highcharts-button") {
+			$(this).remove();
+		}
+	});
+}
+</script>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">4</c:param>
+	</c:import>
+	<div class="title_area">등급관리</div>
+	<div class="content_area">
+   		<div class="grade_chart_area">
+			<div class="grade_chart">
+				<div id="grade_chart"></div>
+   			</div>
+			<div class="grade_chart_right">
+				<div class="grade_chart_title">전체등급</div>
+				<div class="grade_chart_list">
+					<div class="grade">
+						<!-- <div class="grade_color"></div>
+						<div class="grade_name">신규</div>
+						<div class="grade_per">10%</div>
+						<div class="grade_count">(-)</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+        <div class="content_btn_area">
+            <div class="content_btn" id="gradeChangeBtn">등급 변경</div>
+            <div class="content_btn" id="gradeEditBtn">등급 편집</div>
+        </div>
+        <div class="grade_srch_area">
+            <div class="grade_srch_btn">검색</div>
+            <input class="grade_srch_txt" type="text" placeholder="현재목록 내 검색"/>
+            <select class="grade_srch_align">
+                <option>전체</option>
+                <option>등급</option>
+                <option>회사명</option>
+                <option>변경일</option>
+                <option>최근거래일</option>
+            </select>   
+            <input type="text" class="cntPick" value="#개 항목중 #개 선택  "/>
+         </div>
+         <div class="list_wrap">
+	         <table class="list_table">
+	         	<colgroup>
+					<col width="60">
+					<col width="80">
+					<col width="80">
+					<col width="300">
+					<col width="300">
+					<col width="80">
+					<col width="300">
+				</colgroup>
+	            <tr class="grade_list_title">
+	               <td class="check"><input type="checkbox" /></td>
+	               <td class="title">no</td>
+	               <td class="title">등급</td>
+	               <td class="title">회사명</td>
+	               <td class="title">변경일</td>
+	               <td class="title">상태</td>
+	               <td class="title">최근거래일</td>
+	            </tr>
+	            <tr class="grade_list_contents">
+	               <td><input type="checkbox" /></td>
+	               <td>1</td>
+	               <td><input class="grade_name_txt" type="text"
+	                  readonly="readonly" value="등급명"/></td>
+	               <td><input class="company_name_txt" type="text"
+	                  readonly="readonly" value="회사명"/></td>
+	               <td><input class="edit_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	               <td><input class="stat_txt" type="text"
+	                  readonly="readonly" value="진행중"/></td>
+	               <td><input class="rec_trade_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	            </tr>
+	            <tr class="grade_list_contents">
+	               <td><input type="checkbox" /></td>
+	               <td>1</td>
+	               <td><input class="grade_name_txt" type="text"
+	                  readonly="readonly" value="등급명"/></td>
+	               <td><input class="company_name_txt" type="text"
+	                  readonly="readonly" value="회사명"/></td>
+	               <td><input class="edit_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	               <td><input class="stat_txt" type="text"
+	                  readonly="readonly" value="진행중"/></td>
+	               <td><input class="rec_trade_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	            </tr>
+	            <tr class="grade_list_contents">
+	               <td><input type="checkbox" /></td>
+	               <td>1</td>
+	               <td><input class="grade_name_txt" type="text"
+	                  readonly="readonly" value="등급명"/></td>
+	               <td><input class="company_name_txt" type="text"
+	                  readonly="readonly" value="회사명"/></td>
+	               <td><input class="edit_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	               <td><input class="stat_txt" type="text"
+	                  readonly="readonly" value="진행중"/></td>
+	               <td><input class="rec_trade_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	            </tr>
+	            <tr class="grade_list_contents">
+	               <td><input type="checkbox" /></td>
+	               <td>1</td>
+	               <td><input class="grade_name_txt" type="text"
+	                  readonly="readonly" value="등급명"/></td>
+	               <td><input class="company_name_txt" type="text"
+	                  readonly="readonly" value="회사명"/></td>
+	               <td><input class="edit_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	               <td><input class="stat_txt" type="text"
+	                  readonly="readonly" value="진행중"/></td>
+	               <td><input class="rec_trade_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	            </tr>
+	            <tr class="grade_list_contents">
+	               <td><input type="checkbox" /></td>
+	               <td>1</td>
+	               <td><input class="grade_name_txt" type="text"
+	                  readonly="readonly" value="등급명"/></td>
+	               <td><input class="company_name_txt" type="text"
+	                  readonly="readonly" value="회사명"/></td>
+	               <td><input class="edit_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	               <td><input class="stat_txt" type="text"
+	                  readonly="readonly" value="진행중"/></td>
+	               <td><input class="rec_trade_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	            </tr>
+	            <tr class="grade_list_contents">
+	               <td><input type="checkbox" /></td>
+	               <td>1</td>
+	               <td><input class="grade_name_txt" type="text"
+	                  readonly="readonly" value="등급명"/></td>
+	               <td><input class="company_name_txt" type="text"
+	                  readonly="readonly" value="회사명"/></td>
+	               <td><input class="edit_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	               <td><input class="stat_txt" type="text"
+	                  readonly="readonly" value="진행중"/></td>
+	               <td><input class="rec_trade_date_txt" type="text"
+	                  readonly="readonly" value="2019.8.27"/></td>
+	            </tr>
+	         </table>
+	         <div class="list_paging_area">
+	            <span class=list_paging_area>
+	               <input type="button" class="btn_paging" value="<<"/>
+	               <input type="button" class="btn_paging" value="<"/>
+	               <input type="button" class="btn_paging_on" value="1"/>
+	               <input type="button" class="btn_paging" value="2"/>
+	               <input type="button" class="btn_paging" value="3"/>
+	               <input type="button" class="btn_paging" value="4"/>
+	               <input type="button" class="btn_paging" value=">"/>
+	               <input type="button" class="btn_paging" value=">>"/>
+	            </span>
+	     	 </div>
+         </div>
+		<!-- <div class="contents_wrap">
+			<input type="button" value="알림창" id="alertBtn" />
+			<input type="button" value="1버튼" id="oneBtn" />
+			<input type="button" value="2버튼" id="twoBtn" />
+			<input type="button" value="3버튼" id="threeBtn" />
+		</div> -->
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>

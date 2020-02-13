@@ -1,0 +1,9 @@
+package com.smart.mango.batch.dao;
+
+public interface IBatchDao {
+
+	public void randomMachine() throws Throwable;
+
+	public void cmpMachineEnd() throws Throwable;
+
+}

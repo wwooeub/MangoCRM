@@ -1,0 +1,11 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface ICompDao {
+
+	public List<HashMap<String, String>> getCompList(HashMap<String, String> params) throws Throwable;
+	public int getCompCnt(HashMap<String, String> params) throws Throwable;
+
+}

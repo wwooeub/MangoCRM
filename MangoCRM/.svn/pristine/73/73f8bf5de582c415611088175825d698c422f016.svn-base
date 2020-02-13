@@ -1,0 +1,21 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smart.mango.web.inside.dao.IBssDao;
+
+@Service
+public class BssService implements IBssService {
+	@Autowired
+	public IBssDao iBssDao;
+
+	@Override
+	public List<HashMap<String, String>> getlist(HashMap<String, String> params) throws Throwable {
+		return iBssDao.getlist(params);
+	}
+}
+

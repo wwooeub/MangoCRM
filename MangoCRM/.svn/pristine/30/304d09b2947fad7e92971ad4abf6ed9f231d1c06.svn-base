@@ -1,0 +1,5 @@
+package com.smart.mango.web.inside.service;
+
+public interface IBbsPpsService {
+
+}

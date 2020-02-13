@@ -1,0 +1,497 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link
+   href="https://fonts.googleapis.com/css?family=Gothic+A1:300&display=swap"
+   rel="stylesheet">
+<link rel="shortcut icon" href="./images/common/favicon.png" />
+<link rel="stylesheet" type="text/css" href="./css/Main.css" />
+<script type="text/javascript"
+	src="./script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="./script/jquery/jquery.slimscroll.js"></script>
+<script type="text/javascript" src="./script/Main.js"></script>
+<style type="text/css">
+/*
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+.srch {
+	display: table;
+	width: 80px;
+	line-height: 30px;
+	vertical-align : middle;
+	font-size: 10pt;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #595959;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-weight: bold;
+}
+/*버튼의 hover입니다.*/
+.srch:hover {
+	background-color: #292929;
+	cursor: pointer;
+}
+
+.content_srch_txt {
+	display: inline-block;
+	width: 200px;
+	height: 25px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	float: right;
+	border-radius: 5px;
+}
+
+.content_srch_btn {
+	display: inline-block;
+	width: 960px;
+	height: 50px;
+	margin-bottom: 10px;
+}
+
+.content_srch_DD {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	float: right;
+}
+.content_srch_DD:hover {
+	cursor: pointer;
+}
+
+.srch_add:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+
+/* 리드 카드보기 가운데부분  */
+.business_mid {
+	width: 960px;
+	height: 700px;
+	text-align: center;
+}
+
+/* Unqualified, New, Working, Nurturing, Conversion 단계별 */
+.business_mid_stat {
+	display: inline-block;
+	width: calc(25% - 5px);
+	height: 100%;
+	vertical-align: top;
+	text-align: center;
+}
+
+.business_mid_stat_title {
+	display: inline-block;
+	width: 190px;
+	line-height: 40px;
+	border-radius: 5px;
+	background-color: #F2CB07;
+	vertical-align : middle;
+	color: #595959;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.business_mid_stat_title2 {
+	display: inline-block;
+	width: 190px;
+	line-height: 40px;
+	border-radius: 5px;
+	background-color: #262626;
+	vertical-align : middle;
+	color: #FFFFFF;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+/* 카드 내부 */
+.business_card {
+	display: inline-block;
+	width: 180px;
+	height: 100px;
+	background-color: #FFFFFF;
+	border: 1px solid #d0d0d0;
+	border-radius: 3px;
+	margin-top: 10px;
+	text-align: left;
+	padding: 5pt 3pt;
+}
+
+.business_card:hover {
+	box-shadow: 1px 1px 8px #c8c8c8;
+	cursor: pointer;
+}
+
+/* 카드 내부 리드 이름 */
+.business_card_name {
+	display: inline-block;
+	width: 80%;
+	height: auto;
+	color: #F2B807;
+	padding-left: 5px;
+	font-size: 12pt;
+	font-weight: bold;
+	vertical-align: top;
+	margin-bottom: 10px;
+}
+
+/* 카드 버튼 div*/
+.business_card_btn {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	text-align: right;
+	vertical-align: top;
+	border: 0px solid #000000;
+	border-radius: 3px;
+	background-color: #F2B807;
+	margin-top: 0px;
+	margin-left: 10px;
+}
+
+.business_card_btn:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+
+/* 회사명, 전화번호 */
+.business_card_manager, .business_card_progdate, .business_card_company
+	{
+	font-size: 10pt;
+	text-indent: 5pt;
+	color: #595959;
+	margin-bottom: 5px;
+}
+
+/* 수직 구분선 */
+.vertical_line {
+	display: inline-block;
+	width: 1px;
+	height: 100%;
+	background-color: #d0d0d0;
+	border: 0px solid #000000;
+	border-radius: 1px;
+	margin-top: 30px;
+}
+/* 입력폼의 기본 스타일 지정 */
+.input_style_normal {
+	font-size: 10pt;
+	text-indent: 5px;
+	border: 1px solid #cacaca;
+	padding: 0px;
+}
+/* 입력폼의 기본 크기 */
+.input_size_normal {
+	width: 100%;
+	height: 30px;
+}
+/* 입력폼 가로 130px */
+.input_size_130w {
+	display: inline-block;
+	width: 130px;
+	height: 30px;
+}
+/* 입력폼 가로 300px */
+.input_size_400w {
+	display: inline-block;
+	width: 400px;
+	height: 30px;
+}
+/* 입력폼 크기변경 제한 */
+.input_min_mix {
+	width: 100%;
+	max-width: 885px;
+	min-width: 885px;
+	height: 60px;
+	min-height: 60px;
+}
+/* 읽기 전용일때 입력폼 스타일 */
+.is_read_only {
+	background-color: #e0e0e0;
+}
+/* 강조 텍스트 css */
+.acc_txt {
+	color: #ff3737;
+	font-size: 10pt;
+	font-weight: 800;
+}
+
+/* 작은 사이즈의 드랍다운리스트 스타일 */
+.dropdown_small {
+	width: 100px;
+	height: 30px;
+}
+
+.srch_text {
+	padding: 0px;
+	border-width: 0.1px;
+}
+
+.srch_cld {
+	width: 30px;
+	height: 50px;
+	background-color: #FFFFFF;
+	float: right;
+	text-align: center;
+}
+
+.srch_cld>img {
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.cal_btn {
+	cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+	<div class="left_wrap">
+		<div class="logo_wrap">
+			<div>
+				<img src="./images/common/logo.png"><span>Mango</span> CRM
+			</div>
+		</div>
+		<div class="menu_wrap">
+			<div class="first_menu_wrap">
+				<div class="first_menu">
+					<div>
+						<div class="menu_txt">사원관리</div>
+						<div class="menu_gbn"></div>
+					</div>
+				</div>
+				<!-- <div class="second_menu_wrap">
+<div class="second_menu">
+<div>사원등록</div>
+</div>
+<div class="second_menu">
+<div>사원목록</div>
+</div>
+</div> -->
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">부서관리</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">캠페인</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">성과분석</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu_wrap">
+				<div class="first_menu">
+					<div>
+						<div class="menu_txt">결제</div>
+						<div class="menu_gbn"></div>
+					</div>
+				</div>
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">메신저</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">고객</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">고객사</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu_wrap">
+				<div class="first_menu">
+					<div>
+						<div class="menu_txt">등급관리</div>
+						<div class="menu_gbn"></div>
+					</div>
+				</div>
+				<!-- <div class="second_menu_wrap">
+<div class="second_menu">
+<div>등급목록</div>
+</div>
+<div class="second_menu">
+<div>등급 추가/수정</div>
+</div>
+</div> -->
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">리드관리</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu">
+				<div>
+					<div class="menu_txt">일정관리</div>
+					<div class="menu_gbn"></div>
+				</div>
+			</div>
+			<div class="first_menu_wrap">
+				<div class="first_menu_on">
+					<div>
+						<div class="menu_txt">영업관리</div>
+						<div class="menu_gbn"></div>
+					</div>
+				</div>
+				<!-- <div class="second_menu_wrap">
+<div class="second_menu">
+<div>기회</div>
+</div>
+<div class="second_menu">
+<div>제품</div>
+</div>
+<div class="second_menu">
+<div>제안</div>
+</div>
+<div class="second_menu">
+<div>협상</div>
+</div>
+<div class="second_menu">
+<div>계약</div>
+</div>
+</div> -->
+			</div>
+			<div class="first_menu_wrap">
+				<div class="first_menu">
+					<div>
+						<div class="menu_txt">영업목표</div>
+						<div class="menu_gbn"></div>
+					</div>
+				</div>
+				<!-- <div class="second_menu_wrap">
+<div class="second_menu">
+<div>전사목표</div>
+</div>
+<div class="second_menu">
+<div>부서별목표</div>
+</div>
+<div class="second_menu">
+<div>영업비교</div>
+</div>
+</div> -->
+			</div>
+		</div>
+	</div>
+	<div class="right_wrap">
+		<div class="gnb_wrap">
+			<div class="gnb_area">
+				<div>
+					<div>Home >영업관리</div>
+				</div>
+			</div>
+			<div class="person_area">
+				<div class="p_img"></div>
+				<div class="p_info">
+					<div>
+						<div>
+							OOO 이사<br />영업O팀
+						</div>
+					</div>
+				</div>
+				<div class="p_btn_area">
+					<div class="p_btn">
+						<div>
+							<div>정보수정</div>
+						</div>
+					</div>
+					<div class="p_btn_space"></div>
+					<div class="p_btn">
+						<div>
+							<div>로그아웃</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="title_area">영업관리</div>
+		<div class="content_area">
+			<!-- 여기에 내용을 구현 -->
+				<div class="content_srch_btn">
+					<div class="srch">검색</div>
+					<input type="text" class="content_srch_txt" /> <select
+						class="content_srch_DD">
+						<option selected="selected">선택</option>
+						<option>기업명</option>
+						<option>담당자</option>
+					</select>
+					<div class="srch_cld">
+						<img src="./images/common/calendar.png" class="cal_btn" />
+					</div>
+				</div>
+			<div class="business_mid">
+				<!-- 수직 구분선 -->
+				<div class="vertical_line"></div>
+				<!-- 진행도 영역 시작 -->
+				<div class="business_mid_stat">
+					<div class="business_mid_stat_title">영업기회</div>
+					<!-- 리드 카드 형식  -->
+					<div class="business_card">
+						<div class="business_card_name_title">
+							<div class="business_card_name">영업기회명</div>
+							<div class="business_card_btn"></div>
+						</div>
+						<div class="business_card_company">기업명 :</div>
+						<div class="business_card_manager">담당자 :</div>
+						<div class="business_card_progdate">진행일자 :</div>
+					</div>
+					<!-- 리드 카드 형식 끝  -->
+				</div>
+				<!-- 진행도 영역 끝 -->
+				<div class="vertical_line"></div>
+				<!-- New 단계 -->
+				<div class="business_mid_stat">
+					<div class="business_mid_stat_title">영업제안</div>
+
+				</div>
+				<div class="vertical_line"></div>
+				<!-- Working 단계 -->
+				<div class="business_mid_stat">
+					<div class="business_mid_stat_title">영업협상</div>
+
+				</div>
+				<div class="vertical_line"></div>
+				<!-- Nurturing 단계 -->
+				<div class="business_mid_stat">
+					<div class="business_mid_stat_title">영업계약</div>
+
+				</div>
+				<div class="vertical_line"></div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

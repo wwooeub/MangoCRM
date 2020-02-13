@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sche">
+	
+	<!--////////////////////////////// 일정 등록  /////////////////////////////////-->
+	
+	<!-- 일정 등록  -->
+	<!-- <insert id="insertSche" parameterType="hashmap">
+		INSERT INTO SCHE(SCHE_NO, SCHE_DIV_NO, SCHE_ACTI_NO, SCHE_PLACE, SCHE_CON, SCHE_RES, SCHE_SDATE, SCHE_EDATE, SCHE_IMPORTANCE, EMP_NO)  
+		VALUES (SCHE_SEQ.NEXTVAL, #{sche_div_no}, #{sche_acti_no}, #{장소입력}, #{sche_con}, #{sche_res}, #{시작일}, #{종료일}, #{sche_importance}, #{sEmpNo})
+	</insert>  -->
+	
+	<!--///////////////////////////// 일정 등록end  //////////////////////////////-->
+	
+</mapper>

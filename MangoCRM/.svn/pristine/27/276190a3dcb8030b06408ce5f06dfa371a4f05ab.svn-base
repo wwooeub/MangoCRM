@@ -1,0 +1,18 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface ILeadDao {
+
+	List<HashMap<String, String>> getLeadlist(HashMap<String, String> params) throws Throwable;
+
+	int getleadCnt(HashMap<String, String> params) throws Throwable;
+
+	void editLs(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getclientList(HashMap<String, String> params) throws Throwable;
+
+	int getpopCnt(HashMap<String, String> params) throws Throwable;
+
+}

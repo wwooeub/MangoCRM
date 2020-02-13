@@ -1,0 +1,839 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<script type="text/javascript"
+	src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<title>시뮬레이션/보고서</title>
+
+<link rel="shortcut icon" href="./images/common/favicon.png">
+
+<link rel="stylesheet" type="text/css" href="./css/Main.css" />
+
+<script type="text/javascript" src="./jquery/jquery-1.12.4.min.js"></script>
+
+<!-- <link rel="stylesheet" type="text/css" href="./css/main2.css" /> -->
+
+<link rel="stylesheet" type="text/css" href="./css/Main.css" />
+
+<!-- <link rel="stylesheet" type="text/css" href="./css/main3.css" /> -->
+
+<script type="text/javascript" src="./jquery/jquery.slimscroll.js"></script>
+
+<script type="text/javascript" src="./jquery/Main.js"></script>
+
+<script type="text/javascript">
+	$(document)
+
+			.ready(function() {
+
+				$(".enroll_Btn").on("click", function() {
+
+					$('.pop_wrap').removeClass("off");
+
+					$('.pop_wrap').addClass("on");
+
+				});
+
+				$(".cancel_Btn").on("click", function() {
+
+					$('.pop_wrap').removeClass("on");
+
+					$('.pop_wrap').addClass("off");
+
+				});
+
+			})
+</script>
+
+
+
+<style type="text/css">
+html, body {
+	margin: 0;
+	font-size: 0pt;
+	width: 100%;
+	height: 100%;
+}
+
+table {
+	text-align: center;
+	border-bottom: 1px solid #9E9E9E;
+	height: 100px;
+	margin: 0 auto;
+}
+
+/*버튼을 div로 만들었습니다.
+
+  버튼 속성입니다.
+
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+
+*/
+* {
+	box-sizing: border-box;
+}
+
+.content_area {
+	width: 100% !important;
+	font-size: 14pt;
+}
+
+.otbox {
+	width: 1200px;
+	height: 130px;
+	margin-top: 30px;
+}
+
+.fbox {
+	background-color: white;
+	width: 500px;
+	height: 200px;
+}
+
+.ibox {
+	width: 1400px;
+	height: 450px;
+}
+
+.ttr {
+	color: white;
+	background-color: gray;
+}
+
+.ftb {
+	background-color: white;
+	color: black;
+	font-size: 40pt;
+	width: 150px;
+	height: 60px;
+}
+
+.kwc {
+	display: block;
+	height: 50px;
+	margin-top: 40px;
+}
+
+.kwc>div {
+	vertical-align: top;
+}
+
+.file_txt {
+	width: 150px;
+	height: 30px;
+	display: inline-block;
+}
+
+.content_srch_btn>div {
+	display: table;
+	width: 80px;
+	height: 30px;
+	font-size: 10pt;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #595959;
+	padding-top: 5px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.content_srch {
+	width: 1200px;
+	height: 50px;
+}
+
+.content_srch_txt {
+	display: inline-block;
+	width: 200px;
+	height: 25px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	float: right;
+	border-radius: 5px;
+}
+
+.content_srch_btn {
+	display: inline-block;
+	width: 300px;
+	height: 50px;
+	min-width: 220px;
+
+	/* margin-left: 895px; */
+}
+
+.content_srch_DD {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	float: right;
+}
+
+.content_srch_DD1 {
+	display: none;
+}
+
+.content {
+	width: 100px;
+	height: 30px;
+	display: inline-block;
+	margin-left: 1000px;
+}
+
+.test1 {
+	width: 150px;
+	height: 50px;
+	margin-left: 600px;
+}
+
+/* 두표꺼 */
+.select_btn_area {
+	display: inline-block;
+	width: 62%;
+	height: 160px;
+}
+
+.select_area {
+	margin-left: 419px;
+	display: inline-block;
+	width: 210px;
+	height: 30px;
+	vertical-align: bottom;
+	margin-bottom: -37px;
+	margin-top: 7px;
+}
+
+.full_area {
+	height: 150px;
+	width: 400px;
+}
+
+.select_area>select {
+	display: inline-block;
+	font-size: 14pt;
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	vertical-align: top;
+	border-radius: 5px;
+}
+
+.year_select {
+	display: inline-block;
+
+	/*margin-left: calc(100% - 450px);*/
+}
+
+.month_select {
+	display: inline-block;
+}
+
+.btn_area {
+	display: inline-block;
+	width: 350px;
+	height: 100px;
+	min-width: 220px;
+	margin-left: 920px;
+}
+
+.first_btn_area {
+	display: inline-block;
+	width: 275px;
+	height: 40px;
+	text-align: center;
+}
+
+.first_btn_area>div {
+	display: table;
+	width: 80px;
+	height: 30px;
+	font-size: 10pt;
+	color: #595959;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #F2B807;
+	padding-top: 5px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+/*버튼의 hover입니다.*/
+.first_btn_area>div:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+
+* /
+
+.second_vertical_btn_space {
+	display: block;
+	width: 250px;
+	height: 10px;
+}
+
+.second_btn_area {
+	display: inline-block;
+	width: 275px;
+	height: 50px;
+	text-align: center;
+}
+
+.second_btn_area>div {
+	display: table;
+	width: 80px;
+	height: 30px;
+	font-size: 10pt;
+	color: #595959;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #F2B807;
+	padding-top: 5px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+/*버튼의 hover입니다.*/
+.second_btn_area>div:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+
+.third_btn_area {
+	display: block;
+}
+
+.circle {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: #595959;
+	font-size: 16px;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	font-weight: bold;
+}
+
+.circle1 {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: #F2CB07;
+	font-size: 16px;
+	color: black;
+	text-align: center;
+	line-height: 30px;
+	font-weight: bold;
+}
+
+/* 팝업 꺼두기 - 임시 */
+.off {
+	display: none;
+}
+
+/* 팝업 감싸기 */
+.pop_wrap {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 700;
+}
+
+/* 팝업 배경 */
+.pop_bg {
+	width: 100%;
+	height: 100%;
+	background-color: #000000a2;
+	z-index: 710;
+}
+
+/* 팝업 기본형태 */
+.pop {
+	display: inline-block;
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 720;
+}
+
+/* 팝업의 제목부분 */
+.pop_title_area {
+	height: 40px;
+	line-height: 40px;
+	font-size: 0;
+	color: #f2f2f2;
+	background-color: #272727;
+}
+
+/* 팝업의 제목 텍스트 */
+.pop_title_text {
+	display: inline-block;
+	width: 80%;
+	height: 100%;
+	font-size: 12pt;
+	font-weight: bold;
+	text-align: left;
+	text-indent: 10px;
+}
+
+/* 팝업 타이틀 아이콘 */
+.pop_icon {
+	position: relative;
+	top: 4px;
+	width: 20px;
+}
+
+/* 팝업 닫기 영역 */
+.pop_close {
+	display: inline-block;
+	width: 20%;
+	height: 100%;
+	text-align: right;
+	vertical-align: top;
+}
+
+/* 팝업 닫기 버튼 */
+#BtnPopClose {
+	position: relative;
+	top: 10px;
+	left: -10px;
+	cursor: pointer;
+}
+
+/* 팝업 내용 영역 */
+.pop_contents {
+	width: 100%;
+	height: calc(100% - 90px);
+	padding: 10px;
+	color: #272727;
+	font-size: 12pt;
+	text-align: center;
+}
+
+/* 팝업 버튼 영역 */
+.pop_btn_area {
+	height: 50px;
+	line-height: 50px;
+	vertical-align: center;
+	text-align: right;
+}
+
+/* 팝업 크기 관련 */
+.pop_size_small {
+	width: 800px;
+	height: 180px;
+	top: calc(50% - 350px);
+	left: calc(50% - 400px);
+}
+
+.btn_size_normal {
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.btn_yellow {
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	margin-left: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 3px;
+	background-color: #F2B807;
+	border: 1px solid #c5960a;
+	color: #272727;
+	font-size: 10pt;
+	font-weight: bold;
+	cursor: pointer;
+	float: right;
+}
+
+.btn_yellow:hover {
+	background-color: #F2CB07;
+}
+
+.enroll_btn {
+	width: 1200px;
+	height: 50px;
+}
+/*버튼을 div로 만들었습니다.
+  버튼 속성입니다.
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+.enroll_btn>div {
+	display: table;
+	width: 80px;
+	height: 30px;
+	font-size: 10pt;
+	color: #595959;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #F2B807;
+	padding-top: 7px;
+	margin-top: 20px;
+	margin-left: 10px;
+}
+/*버튼의 hover입니다.*/
+.enroll_btn>div:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="left_wrap">
+
+		<div class="logo_wrap">
+
+			<div>
+
+				<img src="./logo.png"><span>Mango</span> CRM
+
+			</div>
+
+		</div>
+
+		<div class="menu_wrap">
+
+
+
+			<div class="first_menu_wrap">
+
+				<div class="first_menu_on">
+
+					<div>
+
+						<div class="menu_txt">캠페인</div>
+
+						<div class="menu_gbn"></div>
+
+					</div>
+
+				</div>
+
+				<div class="second_menu_wrap">
+
+					<div class="second_menu">
+
+						<div>시뮬레이션 실행</div>
+
+					</div>
+
+					<div class="second_menu_on">
+
+						<div>시뮬레이션 결과</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+			<div class="first_menu">
+
+				<div>
+
+					<div class="menu_txt">성과분석</div>
+
+					<div class="menu_gbn"></div>
+
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+			<div class="first_menu_wrap">
+
+				<div class="first_menu">
+
+					<div>
+
+						<div class="menu_txt">메신저</div>
+
+						<div class="menu_gbn"></div>
+
+					</div>
+
+				</div>
+
+
+
+				<div class="second_menu_wrap">
+
+					<div class="second_menu">
+
+						<div>목록</div>
+
+					</div>
+
+					<div class="second_menu">
+
+						<div>초대하기</div>
+
+					</div>
+
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="right_wrap">
+
+		<div class="gnb_wrap">
+
+			<div class="gnb_area">
+
+				<div>
+
+					<div>Home > 시뮬레이션/보고서</div>
+
+				</div>
+
+			</div>
+
+			<div class="person_area">
+
+				<div class="p_img"></div>
+
+				<div class="p_info">
+
+					<div>
+
+						<div>
+
+							홍길동 대리<br />영업1팀
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="p_btn_area">
+
+					<div class="p_btn">
+
+						<div>
+
+							<div>정보수정</div>
+
+						</div>
+
+					</div>
+
+					<div class="p_btn_space"></div>
+
+					<div class="p_btn">
+
+						<div>
+
+							<div>로그아웃</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="title_area">시뮬레이션 결과</div>
+
+
+
+		<!-- 팝업  -->
+
+
+
+		<div class="pop_wrap off">
+
+			<div class="pop_bg">
+
+				<div class="pop pop_size_small">
+
+					<div class="pop_title_area">
+
+						<div class="pop_title_text">
+
+							<img src="images/out/mango.png" alt="" class="pop_icon" />진행
+
+						</div>
+
+						<div class="pop_close">
+
+							X <img src="images/Btn/XBtn.png" alt="" width="20px"
+								id="BtnPopClose" class="cancel_Btn" />
+
+						</div>
+
+					</div>
+
+					<div class="pop_contents">
+
+						<div class="content_table">
+
+							<table class="pop_tbl">
+
+								<colgroup>
+
+									<!-- 테이블열들의 너비입니다. -->
+
+									<col width="10%" />
+
+									<col width="40%" />
+
+
+
+								</colgroup>
+
+								<div>진행하시겠습니까?</div>
+
+							</table>
+
+						</div>
+					</div>
+
+					<div class="pop_btn_area">
+						<!-- 버튼의 스타일은 각자의 스타일 명이나 해당 스타일에 맞춰주세요 -->
+
+						<div class="btn btn_yellow btn_size_normal cancel_Btn"
+							style="margin-right: 10px">취소</div>
+						<div class="btn btn_yellow btn_size_normal submit_Btn"
+							style="margin-right: 10px">확인</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content_area">
+			<div class="circle">1</div>
+			&nbsp;&nbsp;
+			<div class="circle">2</div>
+			&nbsp;&nbsp;
+			<div class="circle">3</div>
+			&nbsp;&nbsp;
+			<div class="circle1">4</div>
+			&nbsp;&nbsp; <br />
+
+			<!-- 첨부파일  -->
+
+			<br />
+			<!--  두표꺼 끝 -->
+
+			<!-- 그래프 영역  -->
+
+			<a href="#"
+				onClick="saveNDrive('https://cafeattach.naver.net/07921ba8bde5e33f10f294a5987b0375dd8f719356/20190822_59_cafefile/28933132_1566465844559_PhHh5W_rtf/%EC%A0%95%EB%A6%AC.rtf?type=attachment', '%EC%A0%95%EB%A6%AC.rtf', '4318');return false"></a>
+
+			<div class="ibox">
+
+				<img src="./images/common/그래프.png"
+					style="width: 1200px; height: 450px;">
+
+			</div>
+			<br />
+			<!-- 테이블 -->
+			<div class="content_btn">
+				<div style="border: inset;">
+					<span class="react">■</span>: (반응값) <span class="real_react">●</span>:
+					(실반응값) <span class="send">▲</span>: (전송량)
+				</div>
+			</div>
+			<br />
+			<div class="otbox">
+
+				<div id="con"></div>
+
+				<table>
+
+					<tr class="sample_1">
+
+						<td class="sample_title1">캠페인 명</td>
+						<td class="sample_title2">전송량</td>
+						<td class="sample_title3">반응값</td>
+						<td class="sample_title4">반응률(%)</td>
+						<td class="sample_title4">실반응값</td>
+						<td class="sample_title5">담당자</td>
+						
+					</tr>
+					<tr class="sample_2">
+
+
+
+						<td>OOO캠페인</td>
+
+						<td><input class="sample1_txt" type="text" readonly
+							value="10" /></td>
+						<td><input class="sample2_txt" type="text"
+							readonly="readonly" value="100" /></td>
+						<td><input class="sample3_txt" type="text"
+							readonly="readonly" value="10%" /></td>
+						<td><input class="sample4_txt" type="text"
+							readonly="readonly" value="10" /></td>
+						<td><input class="sample4_txt" type="text"
+							readonly="readonly" value="담당자" /></td>
+						</tr>
+
+				</table>
+
+			</div>
+
+			
+
+			<div class="enroll_btn">
+				<div>결재 올리기</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cmp">
+
+	<select id="getClientList" parameterType="String" resultType="hashmap">
+		SELECT  ICI.*,JI.*,PI.*,ROW_NUMBER()OVER(ORDER BY ICI.CLIENT_NO) AS RNUM
+		FROM INSIDE_CLIENT_INFO ICI INNER JOIN JOIN_INFO JI ON ICI.CLIENT_NO = JI.CLIENT_NO
+		                            INNER JOIN PAY_INFO PI ON JI.JOIN_NO = PI.JOIN_NO
+		<!-- WHERE 1 = 1
+		${term} -->
+	</select>
+	
+	<select id="clientCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(A.CLIENT_NO) AS CNT
+		FROM(
+		    SELECT ICI.CLIENT_NO , ICI.CLIENT_NAME , ICI.BIRTHD , ICI.GENDER , ICI.PH_NO , ICI.PH_DR , ICI.EMAIL , ICI.EMAIL_DR ,ICI.ADDRESS
+		            ,JI.JOIN_NO , JI.JDATE , JI.JOIN_EDATE , PI.PAY_NO , PI.TARGET_DATE , PI.PAY_MONEY, PI.PAY_WHETHER,
+		            ROW_NUMBER() OVER(ORDER BY ICI.CLIENT_NO) AS RNUM
+		            
+		    FROM INSIDE_CLIENT_INFO ICI INNER JOIN JOIN_INFO JI ON ICI.CLIENT_NO = JI.CLIENT_NO
+		                                INNER JOIN PAY_INFO PI ON JI.JOIN_NO = PI.JOIN_NO
+		    )A
+	
+	</select>
+	
+</mapper>

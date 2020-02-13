@@ -1,0 +1,12 @@
+package com.smart.mango.web.inside.dao;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class DepartDao implements IDepartDao {
+	@Autowired
+	public SqlSession sqlSession;
+
+}

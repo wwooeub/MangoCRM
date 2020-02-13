@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<c:import url="/header"></c:import>
+</head>
+<body>
+<c:import url="/topLeft">
+		<c:param name="menuNo">10</c:param>
+	</c:import>
+	<div class="title_area">캠페인 등록</div>
+	<div class="content_area">
+		<div class="contents_wrap">
+			
+		</div>
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>

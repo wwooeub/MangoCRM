@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comp">
+	<select id="getCompList" parameterType="hashmap" resultType="hashmap">
+		SELECT SQ.NO, SQ.COMP_NAME, SQ.SECT_NAME, SQ.ADDR, SQ.STAT_NAME, SQ.EMP_NAME
+		FROM ( 	SELECT C.COMP_NO AS NO, C.COMP_NAME, CS1.COMP_SECT_NAME AS SECT_NAME,
+					   ('(' || C.COMP_ZC || ') ' || C.COMP_ADDR || ' ' || C.COMP_DETAIL_ADDR ) AS ADDR,
+					   CS2.COMP_STAT_NAME AS STAT_NAME, E.EMP_NAME,
+              		   ROW_NUMBER() OVER(ORDER BY E.EMP_NO DESC) AS RNUM
+       			FROM COMP C INNER JOIN COMP_SECT CS1
+       						ON C.COMP_SECT_NO = CS1.COMP_SECT_NO
+       						INNER JOIN COMP_STAT CS2
+       						ON C.COMP_STAT_NO = CS2.COMP_STAT_NO
+       						INNER JOIN EMP_INFO E
+       						ON C.EMP_NO = E.EMP_NO					
+       			WHERE C.COMP_STAT_NO != 0
+				<if test="searchTxt != null and searchTxt != ''">
+					<choose>
+						<when test="searchGbn == 0">
+							AND C.COMP_NAME LIKE '%' || #{searchTxt} || '%'
+							OR CS1.COMP_SECT_NAME LIKE '%' || #{searchTxt} || '%'
+							OR ('(' || C.COMP_ZC || ') ' || C.COMP_ADDR || ' ' || C.COMP_DETAIL_ADDR ) '%' || #{searchTxt} || '%'
+							OR CS2.COMP_STAT_NAME LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn == 1">AND C.COMP_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 2">AND CS1.COMP_SECT_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 3">AND ('(' || C.COMP_ZC || ') ' || C.COMP_ADDR || ' ' || C.COMP_DETAIL_ADDR ) '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 4">AND CS2.COMP_STAT_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 5">AND E.EMP_NAME LIKE '%' || #{searchTxt} || '%'</when>
+					</choose>
+				</if>
+       	) SQ
+		WHERE SQ.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<select id="getCompCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+       	FROM COMP C INNER JOIN COMP_SECT CS1
+       				ON C.COMP_SECT_NO = CS1.COMP_SECT_NO
+       				INNER JOIN COMP_STAT CS2
+       				ON C.COMP_STAT_NO = CS2.COMP_STAT_NO
+       				INNER JOIN EMP_INFO E
+       				ON C.EMP_NO = E.EMP_NO					
+       			WHERE C.COMP_STAT_NO != 0
+				<if test="searchTxt != null and searchTxt != ''">
+					<choose>
+						<when test="searchGbn == 0">
+							AND C.COMP_NAME LIKE '%' || #{searchTxt} || '%'
+							OR CS1.COMP_SECT_NAME LIKE '%' || #{searchTxt} || '%'
+							OR ('(' || C.COMP_ZC || ') ' || C.COMP_ADDR || ' ' || C.COMP_DETAIL_ADDR ) '%' || #{searchTxt} || '%'
+							OR CS2.COMP_STAT_NAME LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn == 1">AND C.COMP_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 2">AND CS1.COMP_SECT_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 3">AND ('(' || C.COMP_ZC || ') ' || C.COMP_ADDR || ' ' || C.COMP_DETAIL_ADDR ) '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 4">AND CS2.COMP_STAT_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 5">AND E.EMP_NAME LIKE '%' || #{searchTxt} || '%'</when>
+					</choose>
+				</if>
+	</select>
+</mapper>

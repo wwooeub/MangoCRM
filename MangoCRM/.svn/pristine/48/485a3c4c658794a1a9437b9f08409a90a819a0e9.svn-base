@@ -1,0 +1,12 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface IBssService {
+
+	public List<HashMap<String, String>> getBssList(HashMap<String, String> params) throws Throwable;
+
+
+
+}

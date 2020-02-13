@@ -1,0 +1,39 @@
+package com.smart.mango.web.out.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.smart.mango.web.out.service.IMsgService;
+
+@Controller
+public class MsgController {
+	
+	@Autowired
+	public IMsgService iMsgService;
+	
+	//채팅방 페이지
+	@RequestMapping(value = "/msgChat")
+	public ModelAndView msgChat(ModelAndView mav) {
+		mav.setViewName("msg/msgChat");
+		
+		return mav;
+	}
+	
+	//채팅방 초대하기 페이지
+		@RequestMapping(value = "/msgInvite")
+		public ModelAndView msgInvite(ModelAndView mav) {
+			mav.setViewName("msg/msgInvite");
+			
+			return mav;
+		}
+		
+	//채팅방 목록 페이지
+	@RequestMapping(value = "/msgList")
+	public ModelAndView msgList(ModelAndView mav) {
+		mav.setViewName("chat/msgList");
+		
+		return mav;
+	}
+}

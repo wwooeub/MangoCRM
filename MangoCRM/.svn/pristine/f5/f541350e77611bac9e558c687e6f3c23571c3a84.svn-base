@@ -1,0 +1,38 @@
+package com.smart.mango.web.inside.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.smart.mango.common.service.IPagingService;
+import com.smart.mango.web.common.service.ICommonService;
+import com.smart.mango.web.inside.service.ILeadService;
+
+@Controller
+public class LeadController {
+	@Autowired
+	public ILeadService iLeadService;
+	
+	@Autowired
+	public IPagingService iPagingService;
+	
+	@Autowired
+	public ICommonService iCommonService;
+	
+	@RequestMapping(value = "/leadList")
+	public ModelAndView leadList(HttpSession session, ModelAndView mav) {
+		mav.setViewName("Lead/leadList");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/leadCardView")
+	public ModelAndView leadCardView(HttpSession session, ModelAndView mav) {
+		mav.setViewName("Lead/leadCardView");
+		
+		return mav;
+	}
+}

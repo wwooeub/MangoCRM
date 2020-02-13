@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Client">
+	<!-- 고객등록 -->
+	<insert id="clientinsertData" parameterType="hashmap">
+		INSERT INTO CLIENT(CLIENT_NO,
+		CLIENT_NAME
+		<if test="txt__client_company != null and txt__client_company != ''">
+			,EMP_NO
+		</if>
+		<if test="txt_client_depart != null and txt_client_depart != ''">
+			,CLIENT_DEPART_NAME
+		</if>
+		<if test="txt_client_position != null and txt_client_position != ''">
+			,CLIENT_POSI_NAME
+		</if>
+			,CLIENT_PH
+		<if test="txt_client_ln != null and txt_client_ln != ''">
+			,CLIENT_LN
+		</if>
+		<if test="txt_client_fax != null and txt_client_fax != ''">
+			,CLIENT_FAX
+		</if>
+		<if test="txt_client_web != null and txt_client_web != ''">
+			,CLIENT_WEBSITE
+		</if>
+			,CLIENT_EMAIL
+		<if test="dd_client_grade != null and dd_client_grade != ''">
+			,CC_GRADE_NO
+		</if>
+		<if test="chk_client_cp != checked and chk_client_cp != ''">
+			,CLIENT_CP
+		</if>
+		<if test="txt_client_empmanager != null and txt_client_empmanager != ''">
+			,COMP_NO
+		</if>
+		)
+		VALUES( CLIENT_SEQ.NEXTVAL  
+			,#{txt_client_name}		
+		<if test="txt__client_company != null and txt__client_company != ''">
+			,#{txt__client_company}	
+		</if>
+		<if test="txt_client_depart != null and txt_client_depart != ''">
+			,#{txt_client_depart}		
+		</if>
+		<if test="txt_client_position != null and txt_client_position != ''">
+			,#{txt_client_position}		
+		</if>
+			,#{txt_client_ph}
+		<if test="txt_client_ln != null and txt_client_ln != ''">
+			,#{txt_client_ln}		
+		</if>
+		<if test="txt_client_fax != null and txt_client_fax != ''">
+			,#{txt_client_fax}
+		</if>
+		<if test="txt_client_web != null and txt_client_web != ''">
+			,#{txt_client_web}
+		</if>
+		    ,#{txt_client_email}
+		<if test="dd_client_grade != null and dd_client_grade != ''">
+			,#{dd_client_grade}
+		</if>
+		<if test="chk_client_cp != checked and chk_client_cp != ''">
+			,#{chk_client_cp}
+		</if>
+		<if test="txt_client_empmanager != null and txt_client_empmanager != ''">
+			,#{txt_client_empmanager}
+		</if>
+		)
+	</insert>
+	<select id="getClientGrade" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM COMP_CLIENT_GRADE
+	</select>
+	<select id="getEmpCnt" parameterType="hashmap" resultType="Integer">
+			
+	</select>
+</mapper>

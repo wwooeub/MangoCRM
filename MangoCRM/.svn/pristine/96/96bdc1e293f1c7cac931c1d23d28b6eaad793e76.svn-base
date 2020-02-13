@@ -1,0 +1,872 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Contents Test</title>
+<c:import url="/header"></c:import>
+<style type="text/css">
+
+/* 취소 이미지 */
+.btn_cencel_img {
+	background-image: url("resources/images/button/icon_del_white.png");
+	width : 20px;
+	height : 20px;
+	background-size: cover; /* 이미지 설정 */
+	float: right;
+}
+
+
+
+
+/* 버튼끝 */
+
+
+
+/* 기본 입력 폼 % 사이즈 */
+/* 10% */
+.size10{
+	width:10%;
+}
+/* 15% */
+.size15{
+	width:15%;
+}
+/* 20% */
+.size20{
+	width:20% !important;
+}
+/* 25% */
+.size25{
+	width:25%;
+}
+/* 30% */
+.size30{
+	width:30% !important;
+}
+/* 35% */
+.size35{
+	width:35%;
+}
+/* 40% */
+.size40{
+	width:40%;
+}
+/* 48% */
+.size48{
+	width:48%;
+}
+/* 60% */
+.size60{
+	width:60%;
+}
+/* 70% */
+.size70{
+	width:70% !important;
+}
+/* 75% */
+.size75{
+	width:75%;
+}
+/* 80% */
+.size80{
+	width:80% !important;
+}
+/* 90% */
+.size90{
+	width:90%;
+}
+/* 100% */
+.size100{
+	width:100%;
+}
+/* 기본 입력 폼 px 사이즈 */
+/* 10px */
+.pxsize10{
+	width:10px;
+}
+/* 20px */
+.pxsize20{
+	width:20px;
+}
+/* 25px */
+.pxsize25{
+	width:25px;
+}
+/* 30px */
+.pxsize30{
+	width:30px;
+}
+/* 35px */
+.pxsize35{
+	width:35px;
+}
+/* 40px */
+.pxsize40{
+	width:40px;
+}
+/* 50px */
+.pxsize50{
+	width:50px;
+}
+/* 60px */
+.pxsize60{
+	width:60px;
+}
+/* 70px */
+.pxsize70{
+	width:70px;
+}
+/* 75px */
+.pxsize75{
+	width:75px;
+}
+/* 80px */
+.pxsize80{
+	width:80px;
+}
+/* 100px */
+.pxsize100{
+	width:100px;
+}
+/* 120px */
+.pxsize120{
+	width:120px;
+}
+/* 150px */
+.pxsize150{
+	width:150px;
+}
+/* 180px */
+.pxsize180{
+	width:180px;
+}
+/* 190px */
+.pxsize190{
+	width:190px;
+}
+/* 195px */
+.pxsize195{
+	width:195px;
+}
+/* 200px */
+.pxsize200{
+	width:200px;
+}
+/* 마진 left */
+.mgle10 {
+	margin-left : 10px;
+}
+/* 가로스크롤 */
+.widthscroll {
+    width: 100%;
+    white-space: nowrap;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    overflow: scroll !important;
+}
+.widthscroll::-webkit-scrollbar {
+    /*display: none;  Chrome, Safari, Opera*/
+    width: 0 !important;
+}
+/* LAYOUT 끝 */
+
+
+/* 사이즈 설정 입력폼 스타일 */
+.input_size {
+    height: 30px;
+    border: 1px solid #eeeeee;
+    border-radius: 3px;
+	vertical-align: middle;
+    font-size: 10pt;
+    text-indent: 5px;
+
+}
+
+/* 등록 체크박스 */
+.cp_chbox {
+    background-color: initial;
+    cursor: default;
+    -webkit-appearance: checkbox;
+    box-sizing: border-box;
+    margin: 8px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+    width: 20px;
+    height: 20px;
+}
+
+/* INPUT */
+
+
+/* 
+    밑 CSS는 고객사 검색과 관련된 팝업입니다.
+*/
+/* 고객사 검색 팝업 크기 */
+.pop_size_company {
+    width: 800px;
+    height: 670px;
+    top: calc(50% - 275px);
+    left: calc(50% - 500px);
+}
+/* 고객사 검색 입력창 */
+.pop_company_search {
+    display: inline-block;
+    width: 60%;
+    height: 50px;
+}
+/* 고객사 체크박스 영역 */
+.input_company_chbox_area {
+    width: 40%;
+    display: inline-block;
+}
+/* 고객사 체크박스 크기 */
+.input_company_chbox {
+    width : 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}   
+/* 고객사 체크박스 호버 */
+.input_company_chbox:hover{
+    cursor: pointer;
+}
+
+/* 고객사 테이블 */
+.pop_company_table {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	font-size: 10pt !important;
+    font-weight: bold;
+    border-top : 0px;
+    
+}
+.pop_company_table > tbody > tr > td {
+	font-size : 15px;
+}
+/* 고객사 테이블 제목 */
+.pop_title_style {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #cccccc;
+	background-color: #595959;
+	font-size: 10pt;
+	font-weight: bold;
+    color: #ffffff;
+}
+/* 하단 페이징 영역 */
+.pop_content_bottom {
+	display: block;
+	height: 50px;
+	padding: 0px;
+	font-size: 0px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.pop_content_bottom_1_span {
+	display: inline-block;
+}
+
+.pop_bottom_btn_1 {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 0px;
+	margin-left: 2px;
+	background-color: #595959;
+	color: #F2F2F2;
+}
+
+.pop_bottom_btn_2 {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-left : 2px;
+	border : 0px;
+	background-color : #595959;
+	color: #F2F2F2;
+	border-radius : 5px;
+}
+.pop_bottom_btn_2_on {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-left : 2px;
+	border : 0px;
+	background-color : #F2CB07;
+	color: #595959;
+	border-radius : 5px;
+}
+
+.pop_bottom_btn_2:hover {
+	background-color: #F2CB07;
+	color: #595959;
+	cursor : pointer;
+}
+.pop_bottom_btn_1:hover {
+	background-color: #F2CB07;
+	color: #595959;
+	cursor: pointer;
+}
+
+/* 하단 페이징 영역 끝 */
+/* 담당자 검색 영역 */
+.pop_manager_select{
+	width : 100%;
+    padding: 10px;
+    height: 80px;
+    display: inline-block;
+    vertical-align: top;
+}
+.pop_btn_manager {
+    display: inline-block;
+    width: 130px;
+    padding: 8px 25px 8px 8px;
+    color: #333;
+    text-align: left;
+    border: 1px solid #E1E6EB;
+    background-color: #FBFCFD;
+    border-radius: 2px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.pop_column {
+	height : 40px;
+}
+
+.pop_column td:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.address_contents_card {
+	height : 530px;
+}
+/* POPUP */
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+	ClientSet();
+	$("#btn_client_add").on("click", function() {
+		$("#actionForm").attr("action","client_add");
+		$("#actionForm").submit();
+	});
+	$("#alertBtn").on("click", function() {
+		makeAlert(1, "하이", "내용임", null);
+	});
+	
+	$("#oneBtn").on("click", function() {
+		makeOneBtnPopup(1, "고객사 검색", html, true, 800, 600, null, "검색", function() {
+			closePopup(1);
+		});
+	});
+	
+	$("#twoBtn").on("click", function() {
+		var html = "이미 해당 이름을 가진 고객이 있습니다. <br>정말로 저장하시겠습니까?";
+		
+		makeTwoBtnPopup(1, "이름 중복", html, true, 600, 400, null, "확인", function() {
+			//확인 동작
+		},"취소", function() {
+			closePopup(1);
+		});
+	});
+	$("#1twoBtn").on("click", function() {
+		
+	});
+	
+	$("#threeBtn").on("click", function() {
+		makeThreeBtnPopup(1, "버튼셋팝업", "내용들감", false, 400, 600, null, "어라라", function() {
+			closePopup(1);
+		},"하이", function() {
+			closePopup(1);
+		},"마지막", function() {
+			closePopup(1);
+		});
+	});
+	
+	$("#btn_mgr_search").on("click", function() {
+		var html = "";
+		html +="<form id=\"pop_emp_Form\" action=\"#\" method=\"post\">"	
+		html +="<div style=\"font-size : 0;\">                                                                                                ";
+		html +="<div>";
+		html +=" 	<input type=\"text\" class=\"input_address2\" id=\"txt_emp_search\" name=\"txt_emp_search\" placeholder=\"Ex)구디아카데미\">";
+		html +=" 	<img src=\"resources/images/Lead/icon_search_gray.png\" id=\"btn_emp_select\" name=\"btn_emp_select\" alt=\"검색\" width=\"30px\" class=\"address_search_icon\">";
+		html +=" 	<img src=\"resources/images/Lead/icon_cancel_gray.png\" id=\"btn_emp_cencel\" alt=\"\" width=\"20px\" class=\"address_search_cancel\">";
+		html +="</div>";
+// 		html +="	<div class=\"pop_company_search size80\">                                                                                 ";
+// 		html +="		<input type=\"text\" class=\"input_address\" id=\"txt_emp_search\" name=\"txt_emp_search\" placeholder=\"예) 부서/담당자명\"/>";
+// 		html +="	</div>                                                                                                                   ";
+// 		html +="	<div class=\"input_company_chbox_area size20\">                                                                           ";
+// 		html +="		<div class=\"field_contents\">                                                                                        ";
+// 		html +="			<div class=\"btn btn_black btn_size_normal\" id=\"btn_emp_select\" name=\"btn_emp_select\">검색</div>              ";
+// 		html +="		</div>                                                                                                               ";
+// 		html +="	</div>                                                                                                                   ";
+		html +="</div>                                                                                                                       ";
+		html +="</form>";	
+		html +="<div class=\"address_contents_card\">                                                                                         ";
+		html +="	<div class=\"address_table_list\">                                                                                         ";
+		html +="	</div> "
+		getEmpList();
+		html +="	<div class=\"address_result_paging\">                                                                                     ";
+		html +="		<div class=\"list_paging_area\">                                                                                      ";
+	    html +="        </div>                                                                                                               ";
+		html +="	</div>                                                                                                                   ";
+		html +="</div>                                                                                                                       ";
+		
+		makeNoBtnPopup(1, "담당자 검색", html, true, 600, 670, null, function() {
+			closePopup(1);
+		});
+	});
+	
+	$("#btn_client_search").on("click", function() {
+		var html = "";
+		html +="<div style=\"font-size :0;\">";
+		html +="<div class=\"pop_company_search\">                                                                      ";
+		html +="	<input type=\"text\" class=\"input_address\" placeholder=\"예) 구디아카데미\" id=\"txt_company_search\"/>"; 
+		html +="</div>                                                                                                    ";
+		html +="<div class=\"input_company_chbox_area\">                                                                  ";
+		html +="	<div class=\"field_contents\">                                                                        ";
+		html +="		<input class=\"input_company_chbox\" type=\"checkbox\" id=\"client_empty\" />                     ";
+		html +="		<label class=\"emp_form\" for=\"client_empty\">고객없음</label>                                   ";
+		html +="		<input class=\"input_company_chbox\" type=\"checkbox\" id=\"client_my\" />                        ";
+		html +="		<label class=\"emp_form\" for=\"client_my\">내고객</label>                                        ";
+		html +="		<div class=\"btn btn_black btn_size_normal\">검색</div>                                           ";
+		html +="	</div>                                                                                                ";
+		html +="</div>                                                                                                    ";
+		html +="</div>";
+		html +="<div class=\"address_contents_card\">                                                                     ";
+		html +="	<table class=\"pop_company_table\">                                                                   ";
+		html +="		<colgroup>                                                                                        ";
+		html +="			<!-- 테이블열들의 너비입니다. -->                                                             ";
+		html +="			<col width=\"20%\" />                                                                         ";
+		html +="			<col width=\"25%\" />                                                                         ";
+		html +="			<col width=\"55%\" />                                                                         ";
+		html +="		</colgroup>                                                                                       ";
+		html +="		<tr class=\"pop_title_style\">                                                                    ";
+		html +="			<td>기업분류</td>                                                                             ";
+		html +="			<td>기업명</td>                                                                               ";
+		html +="			<td>주소</td>                                                                                 ";
+		html +="		</tr>                                                                                             ";
+		html +="		<tr class=\"pop_content_style\" name=\"pop_comp1\">                                               ";
+		html +="			<td>유한법인</td>                                                                             ";
+		html +="			<td>삼성전자</td>                                                                             ";
+		html +="			<td>서울특별시 강남구 테헤란로 1234</td>                                                      ";
+		html +="		</tr>                                                                                             ";
+		html +="	</table>                                                                                              ";
+		html +="	<div class=\"address_result_paging\">                                                                 ";
+		html +="		<div class=\"list_paging_area\">                                                                  ";
+	    html +="        </div>                                                                                            ";
+		html +="	</div>                                                                                                ";
+		html +="</div>                                                                                                    ";
+		makeOneBtnPopup(1, "고객사 검색", html, true, 800, 600, null, "닫기", function() {
+			closePopup(1);
+		});
+	});
+	/* 체크박스 값 넣기 */
+	$("#chk_client_cp").on("click", function() {
+		var chk_client_cp = $("#chk_client_cp");
+		if (chk_client_cp.is(":checked") == true) {
+			chk_client_cp.val(1);
+		}
+		else if (chk_client_cp.is(":checked") == false) {
+			chk_client_cp.val(0);
+		}
+
+	});
+	/* 고객 등록 */
+	$("#btn_client_save").on("click",function() {
+		var phoneRule = /^\d{3}-\d{3,4}-\d{4}$/;
+		var linephoneRule = /^\d{2,4}-\d{4}-\d{4}$/;
+		var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+
+		if($.trim($("#txt_client_name").val()) == "") {
+			alert("이름을 입력하세요.");
+			$("#txt_client_name").focus();
+		} else if($.trim($("#txt_client_ph").val()) == "") {
+			alert("휴대번호를 입력하세요.");
+			$("#txt_client_ph").focus();
+		} else if($.trim($("#txt_client_email").val()) == "") {
+			alert("이메일을 입력하세요.");
+			$("#txt_client_email").focus();
+		} else if(!emailRule.test($("#txt_client_email").val())) {            
+			alert("이메일을 입력형식이 다릅니다.");
+			$("#txt_client_email").focus();
+		}	else if(!phoneRule.test($("#txt_client_ph").val())) {            
+			alert("휴대번호 입력형식이 다릅니다");
+			$("#txt_client_ph").focus();
+		}	else if(!linephoneRule.test($("#txt_client_ln").val()) && ($("#txt_client_ln").val() != "")) {            
+			alert("유선번호 입력형식이 다릅니다");
+			$("#txt_client_ln").focus();
+		}	else if(!linephoneRule.test($("#txt_client_fax").val()) && ($("#txt_client_fax").val() != "")) {            
+			alert("팩스번호 입력형식이 다릅니다");
+			$("#txt_client_fax").focus();
+		}		
+		else {
+			var html = "고객 정보를 저장하시겠습니까?";
+			
+			makeTwoBtnPopup(1, "고객 등록", html, true, 300, 200, null, "확인", function() {
+				//jQuery 활용
+				var params = $("#addForm").serialize(); //serialize폼안에 값 전달()
+				$.ajax({
+					type : "post", //데이터 전송방식
+					url : "clientWriteAjax", //주소
+					dataType :"json", //데이터 전송규격
+					data : params ,  //보낼 데이터
+					//{키 : 값, 키 : 값,...} -> json
+					success : function(result) {
+						if(result.res=="SUCCESS") {
+//	 						console.log("bWriteAjax params" +params);
+							alert("등록되었습니다");
+	 						$("#addForm").attr("action","clientList");
+	 						$("#addForm").submit();
+							
+						} else {
+							alert("등록에 실패하였습니다");
+						}
+					},
+					error : function(request , status, error) {
+						console.log("status :" + request.status); //상태코드
+						console.log("text :" + request.responceText); //request영역 반환텍스트
+						console.log("error :" + request.error); //에러메세지
+					}
+				});
+				
+				//확인 동작
+			},"취소", function() {
+				closePopup(1);
+			});
+			
+			
+		}
+	});
+	// 전화번호 텍스트 포맷팅
+	 $("#txt_client_ph, #txt_client_ln, #txt_client_fax").on("keyup", function() {
+		 inputNumberFormat(this);
+	 });
+	 
+	// 사원 데이터 리스트 Get
+		function getEmpList() {
+			var params = $("#searchForm").serialize() + "&" + $("#action").serialize();
+
+			$.ajax({
+				type: "post",
+				url: "getEmppopListAjax",
+				dataType: "json",
+				data: params,
+				success: function(result) {
+					drawListPaging(result.emppb);
+					drawEmpList(result.emplist);
+				},
+				error : function(request, status, error) {
+					console.log("status : " + request.status);
+					console.log("text : " + request.responseTest);
+					console.log("error : " + error);
+				}
+			});
+		}
+	
+			var flag = true;
+		// 사원 리스트 Draw
+		function drawEmpList(list) {
+			if(flag = true){
+				var html = "";
+				html +="		<table class=\"pop_company_table\">                                                                                       ";
+				html +="			<colgroup>                                                                                                           ";
+				html +="				<!-- 테이블열들의 너비입니다. -->                                                                                ";
+				html +="				<col width=\"50%\" />                                                                                             ";
+				html +="				<col width=\"50%\" />                                                                                             ";
+				html +="			</colgroup>                                                                                                          ";
+				html +="  			<thead>";
+				html +="			<tr class=\"pop_title_style\" >                                                                                       ";
+				html +="				<td>부서</td>                                                                                                    ";
+				html +="				<td>담당자</td>                                                                                                  ";
+				html +="			</tr>                                                                                                                ";
+				html +="			</thead>";
+				html +="			<tbody>";
+				if(list.length > 0) {
+					for(var i in list) {
+						html += "<tr class=\"pop_column\" name=\"" + list[i].NO+","+list[i].NAME + "\">";
+		          		html += "<td>" + list[i].DEPART_NAME + "</td>";
+		          		html += "<td>" + list[i].NAME + "</td>";
+		       			html += "</tr>";
+					}
+				}
+				else {
+					html += "<tr class=\"pop_column\" \">";
+		   			html += "<td colspan=\"2\">조회된 데이터가 없습니다.</td>";
+		   			html += "</tr>";
+		   			$(".list_paging_area").html("");
+				}
+				html +="            </tbody>";
+				html +="		</table>                                                                                                                 ";
+				$(".address_table_list").html(html);
+				flag = false;
+			}
+			
+			// 담당자추가
+			$(".pop_column").on("click" , function() {
+				var arr = [] ;
+				arr = $(this).attr("name").split(",");
+				$("#txt_client_empno").val(arr[0]);
+				$("#txt_client_empname").val(arr[1]);
+				closePopup(1);
+			});
+			
+			//담당자검색
+			$("#btn_emp_select").on("click", function() {
+				var params = $("#pop_emp_Form").serialize()+ "&" + $("#dataForm").serialize();
+
+				$.ajax({
+					type: "post",
+					url: "getEmppopListAjax",
+					dataType: "json",
+					data: params,
+					success: function(result) {
+						drawListPaging(result.emppb);
+						drawEmpList(result.emplist);
+					},
+					error : function(request, status, error) {
+						console.log("status : " + request.status);
+						console.log("text : " + request.responseTest);
+						console.log("error : " + error);
+					}
+				});
+				
+			});
+			
+			/* 담당자 텍스트지우기 */
+			$("#btn_emp_cencel").on("click", function() {
+				$("#txt_emp_search").val("");
+			});
+			
+			// Paging 버튼 클릭 이벤트
+			$(".list_paging_area").on("click", "div", function() {
+				if(!isNaN($(this).attr("name") * 1)) {
+					$("#page").val($(this).attr("name"));
+					getEmpList();
+				}
+			});
+			
+// 			pop_emp_Form,txt_emp_search,btn_emp_select
+		}
+		
+		// 사원 리스트 Paging draw
+		function drawListPaging(pb) {
+			var html = "";
+			html += "<div class=\"btn_paging\" name=\"1\">&lt;&lt;</div>";
+
+			html += "<div class=\"btn_paging\"name=\"";
+			html += ($("#page").val() == "1")? "1" : ($("#page").val() * 1 - 1);
+			html += "\">&lt;</div>";
+
+			for(var i = pb.startPcount; i <= pb.endPcount; i++) {		
+				html += "<div class=\"btn_paging";
+				html += ($("#page").val() == i)? "_on\">" : "\" name=\"" + i + "\">";
+				html += i + "</div>";
+			}
+			
+			html += "<div class=\"btn_paging\"name=\"";
+			html += ($("#page").val() == (pb.maxPcount))? pb.maxPcount : ($("#page").val() * 1 + 1);
+			html += "\">&gt;</div>";
+
+			html += "<div class=\"btn_paging\" name=\"" + pb.maxPcount + "\">&gt;&gt;</div>";
+			
+			$(".list_paging_area").html(html);
+		}
+		
+		
+});
+
+//고객 등록 셋팅
+function ClientSet() {
+	var params = $("#actionForm").serialize();
+	$.ajax({ 
+		type : "post",
+		url : "clientAddSetAjax",
+		dataType :"json",
+		data : params,
+		success:function(result) {
+			ClientGradeSet(result.grade);
+		},
+		error:function(request,status,error) {
+			console.log("status :" + request.status); //상태코드
+			console.log("text :" + request.responceText); //request영역 반환텍스트
+			console.log("error :" + request.error); //에러메세지
+		}
+		
+	});
+}
+// 등급가져오기
+function ClientGradeSet(grade) {
+// 	var html = "<option selected=\"selected\" value=\"0\">없음</option>";
+	var html = "";
+	for(var i in grade) {
+		html += "<option value=\"" + grade[i].CC_GRADE_NO + "\">" + grade[i].CC_GRADE_NAME + "</option>";
+	}
+	$("#dd_client_grade").html(html);
+}
+
+function numberFormat(inputNumber) {
+		
+	   return inputNumber.toString().replace(/\B(?=(\d{3}-\d{3,4}-\d{4})+(?!\d))/g, ",");
+	}
+
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{4})+(?!\d))/g, '$1-');
+}
+
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+
+</script>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">2</c:param>
+	</c:import>
+	<div class="title_area">고객 등록</div>
+	<div class="content_area">
+		<div class="contents_wrap">
+			<input type="button" value="알림창" id="alertBtn" />
+			<input type="button" value="1버튼" id="oneBtn" />
+			<input type="button" value="2버튼" id="twoBtn" />
+			<input type="button" value="3버튼" id="threeBtn" />
+			<!-- 여기에 내용을 구현 -->
+			<!-- 버튼영역 -->
+			<div class="table_top_area">
+				<div class="top_title_area"></div>
+				<div class="top_btn_area">
+					<div class="btn btn_yellow btn_size_normal" id="btn_client_save">저장</div>
+					<div class="btn btn_yellow btn_size_normal" id="btn_client_cancel">취소</div>
+				</div>
+			</div>
+			<form action="#" id="action" method="post">
+				<input type="hidden" id="page" name="page" value="${page}">
+			</form>
+			<form action="#" id="addForm" method="post">
+			<!-- 테이블 영역입니다. -->
+				<table class="table_normal">
+					<colgroup>
+						<!-- 테이블열들의 너비입니다. -->
+						<col width="10%" />
+						<col width="40%" />
+						<col width="10%" />
+						<col width="40%" />
+					</colgroup>
+					<tr>
+						<td class="field_name first_field_name">
+							이름<span class="acc_txt">*</span>
+						</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_name" name="txt_client_name" class="input_normal" />
+						</td>
+						<td class="field_name">
+							고객사
+						</td>
+					    <td class="field_contents">
+							<input type="text" id="txt__client_company" name="txt__client_company" class="input_size size75" />
+							<div class="btn btn_black btn_size_normal" id="btn_client_search">검색</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="field_name first_field_name">부서</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_depart" name="txt_client_depart" class="input_normal" />
+						</td>
+						<td class="field_name">
+							직책
+						</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_position" name="txt_client_position" class="input_normal" />
+						</td>
+					</tr>
+					<tr>
+						<td class="field_name first_field_name">휴대번호 <span
+							class="acc_txt">*</span>
+						</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_ph" name="txt_client_ph" maxlength="14" class="input_normal" />
+						</td>
+						<td class="field_name">
+							유선번호
+						</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_ln" name="txt_client_ln" maxlength="14" class="input_normal" />
+						</td>
+					</tr>
+					<tr>
+						<td class="field_name first_field_name">
+							팩스
+						</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_fax" name="txt_client_fax" maxlength="14" class="input_normal" />
+						</td>
+						<td class="field_name">
+							웹사이트
+						</td>
+						<td class="field_contents">
+							<input type="text" id="txt_client_web" name="txt_client_web" class="input_normal" />
+						</td>
+					</tr>
+					<tr>
+						<td class="field_name first_field_name">이메일 <span
+							class="acc_txt">*</span>
+						</td>
+						<td class="field_contents"> 
+							<input type="text" id="txt_client_email" name="txt_client_email" class="input_normal" />
+						</td>
+						<td class="field_name">
+							등급
+						</td>
+						<td class="field_contents">
+							<select class="input_normal" id="dd_client_grade" name="dd_client_grade">
+								<option selected="selected" value="0">없음</option>
+								<option >Bronze</option>
+								<option value="Silver">Silver</option>
+								<option value="Gold">Gold</option>
+								<option value="Platinum">Platinum</option>
+								<option value="Diamond">Diamond</option>
+								<!-- <option value="Master">Master</option> -->
+								<option value="Challenger">Challenger</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="field_name first_field_name">
+							중요인물
+						</td>
+						<td class="field_contents">
+							<input class="cp_chbox" id="chk_client_cp" name="chk_client_cp" type="checkbox" value="0"/>
+						</td>
+						<td class="field_name">
+							담당자
+						</td>
+						<td class="field_contents">
+							<input type="hidden" name="txt_client_empno" id="txt_client_empno" value="">
+							<input type="text" id="txt_client_empname" name="txt_client_empname" readonly="readonly" class="input_size size75" />
+							<div class="btn btn_black btn_size_normal" id="btn_mgr_search">검색</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>

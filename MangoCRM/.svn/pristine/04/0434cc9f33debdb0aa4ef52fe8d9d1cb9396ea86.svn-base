@@ -1,0 +1,512 @@
+@charset "UTF-8";
+.grade_chart_area {
+	width: 1200px;
+	height: 280px;
+}
+
+.grade_chart {
+	display: inline-block;
+	margin: 0px 50px 0px 20px;
+	width: 300px;
+	height: 300px;
+}
+
+.grade_chart_right {
+	display: inline-block;
+	font-size: 9pt;
+	/* height: 230px; */
+	width: 540px;
+	vertical-align: top;
+	
+}
+
+.grade {
+	display: inline-block;
+	background-color: white;
+	width: 230px;
+	height: 25px;
+	margin: 15px 0;
+	vertical-align: middle;
+}
+
+.grade_name {
+	width: 50px;
+	display: inline-block;
+	height: 100%;
+	font-size: 13pt;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.grade_per{
+	width: 40px;
+	display: inline-block;
+	height: 100%;
+	font-size: 13pt;
+}
+
+.grade_count{
+	line-height: 25px;
+	display: inline-block;
+	height: 100%;
+	font-size: 11pt;
+}
+
+.grade_color {
+	vertical-align: middle;
+	display: inline-block;
+	background-color: #01DF01;
+	height: 20px;
+	width: 20px;
+}
+
+.grade_chart_title {
+	font-size: 20pt;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.grade_rank {
+	font-size: 16pt;
+}
+
+.grade_name_edit {
+	width: 200px;
+	height: 30px;
+	font-size : 11pt;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	padding: 10px;
+}
+
+.grade_name_edit:focus {
+	border : 1px solid #F2CB07;
+}
+
+.grade_edit {
+	width: 70px;
+	height: 20px;
+}
+
+.grade_color_btn {
+	display: inline-block;
+	background-color: #000;
+	height: 25px;
+	width: 25px;
+	cursor: pointer;
+}
+
+.list_table {
+    width: 1200px;
+ 	text-align: center;
+  	border-collapse: collapse;
+   	font-size : 10pt;
+	font-weight: bold;
+}
+
+.edit_table {
+	width: 1080px;
+ 	text-align: center;
+  	border-collapse: collapse;
+   	font-size : 10pt;
+}
+
+.grade_rank{
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+.edit_btn_area{
+	width : 1080px;
+   	height : 50px;
+}
+
+.edit_btn {
+	display: table;
+   	width : 80px;
+   	height: 25px;
+    font-size: 10pt;
+    color: #595959;
+    text-align : center;
+    border-radius : 5px;
+    float : right;
+    background-color : #F2B807;
+    padding-top : 5px;
+    margin-top : 10px;
+    margin-left : 10px;
+}
+
+.edit_btn:hover{
+	background-color : #F2CB07;
+  	cursor : pointer;
+}
+
+.content_btn_area {
+   width : 1200px;
+   height : 50px;
+}
+
+.content_btn {
+   display: table;
+   width : 80px;
+   height: 25px;
+   font-size: 10pt;
+   color: #595959;
+   text-align : center;
+   border-radius : 5px;
+   float : right;
+   background-color : #F2B807;
+   padding-top : 5px;
+   margin-top : 20px;
+   margin-left : 10px;
+}
+
+.content_btn:hover {
+   background-color : #F2CB07;
+   cursor : pointer;
+}
+
+.grade_srch_area{
+   width : 1200px;
+   height : 50px;
+}
+
+.grade_srch_btn {
+   display: table;
+   width : 80px;
+   height: 25px;
+   font-size: 10pt;
+   font-weight: bold;
+   color: #F2F2F2;
+   text-align : center;
+   border-radius : 5px;
+   float : right;
+   background-color : #595959;
+   padding-top : 5px;
+   margin-top : 10px;
+   margin-left : 10px;
+}
+
+.grade_add_btn {
+   display: table;
+   width : 80px;
+   height: 25px;
+   font-size: 10pt;
+   font-weight: bold;
+   color: #F2F2F2;
+   text-align : center;
+   border-radius : 5px;
+   float : right;
+   background-color : #595959;
+   padding-top : 5px;
+   margin-top : 10px;
+   margin-left : 10px;
+}
+
+.grade_del_btn{
+	display: table;
+    width : 80px;
+    height: 25px;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #F2F2F2;
+    text-align : center;
+    border-radius : 5px;
+    float : right;
+    background-color : #595959;
+    padding-top : 5px;
+    margin-top : 10px;
+    margin-left : 10px;
+}
+
+.grade_srch_btn:hover {
+   background-color : #292929;
+   cursor : pointer;
+}
+
+.grade_add_btn:hover, .grade_del_btn:hover {
+   background-color : #292929;
+   cursor : pointer;
+}
+
+.grade_srch_txt{
+   display : inline-block;
+   width: 200px;
+   height: 25px;
+   font-size: 10pt;
+   margin-top : 10px;
+   margin-left : 10px;
+   border : 1px solid #ccc;
+   float : right;
+   border-radius : 5px;
+   padding-left: 5px;
+}
+
+.grade_srch_align{
+   display : inline-block;
+   width: 100px;
+   height: 25px;
+   font-size: 10pt;
+   margin-top : 10px;
+   margin-left : 10px;
+   border : 1px solid #ccc;
+   border-radius : 5px;
+   float : right;
+}
+
+.grade_edit {
+	width: 100px;
+	height: 30px;
+	font-size : 10pt;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+}
+
+.cntPick {
+	display : inline-block;
+	width : 200px;
+	height : 25px;
+	margin-top : 10px;
+	margin-left : 10px;
+	float : left;
+	border: 0;
+   	font-size: 10pt;
+   	font-weight: bold;
+	color: #595959;
+}
+
+.grade_list_title {
+   width: 100%;
+   height: 50px;
+   border-bottom: 1px solid #cccccc;
+}
+
+.grade_list_contents {
+   height: 50px;
+   border-bottom: 1px solid #cccccc;
+   font-size: 10pt;
+}
+
+.grade_list_contents input{
+	outline: none;
+}
+
+.check {
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 75px;
+}
+
+.title{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #f2f2f2;
+}
+
+.grade_name_txt {
+	text-align: center;
+	border : 0;
+	width: 150px;
+}
+
+.company_name_txt {
+	text-align: center;
+	border : 0;
+	width: 150px;
+}
+
+.company_name_txt:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+
+.edit_date_txt {
+	text-align: center;
+	border : 0;
+	width: 150px;
+}
+
+.stat_txt {
+	text-align: center;
+	border : 0;
+	width: 150px;
+}
+
+.rec_trade_date_txt {
+	text-align: center;
+	border : 0;
+	width: 150px;
+}
+
+.bottom_btn_1 {
+   display : inline-block;
+   width : 40px;
+   height : 40px;
+   border : 0px;
+   margin-left : 2px;
+   background-color : #595959;
+   color: #F2F2F2;
+}
+
+.bottom_btn_2 {
+   display : inline-block;
+   width : 40px;
+   height : 40px;
+   margin-left : 2px;
+   border : 0px;
+   background-color : #595959;
+   color: #F2F2F2;
+}
+
+.bottom_btn_1:hover {
+   background-color: #F2CB07;
+   color: #595959;
+   cursor : pointer;
+}
+
+.bottom_btn_2:hover {
+   background-color: #F2CB07;
+   color: #595959;
+   cursor : pointer;
+ }
+
+.palette {
+	display: none;
+	position: absolute;
+	left: 980px;
+	background-color: #FFF;
+	width: 150px;
+	height: 121px;
+	border-radius: 5px;
+	padding: 9px;
+	box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.5);
+	border: 1px solid gray;
+	z-index: 20;
+}
+
+.palette:before {
+	content: '';
+	position: absolute;
+	top: 9px;
+	left: 29px;
+	width: 0px;
+	height: 0px;
+	border: 12px solid transparent;
+	border-bottom-color: black;
+	border-top: 0;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+
+.palette:after {
+	content: '';
+	position: absolute;
+	top: 9px;
+	left: 29px;
+	width: 0px;
+	height: 0px;
+	border: 11px solid transparent;
+	border-bottom-color: #FFF;
+	border-top: 0;
+	margin-left: -20px;
+	margin-top: -20px;
+	z-index: 20;
+}
+
+.color1 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #FF0000;
+}
+.color2 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #FF8000;
+}
+.color3 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #FFED0D;
+}
+.color4 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #01DF01;
+}
+.color5 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #0040FF;
+}
+.color6 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #0404B4;
+}
+.color7 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #A901DB;
+}
+.color8 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #A5421E;
+}
+.color9 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #30A9DE;
+}
+.color10 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #58C9B9;
+}
+.color11 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #E88B89;
+}
+.color12 {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	background-color: #000;
+}
+
+.color1:hover, .color2:hover, .color3:hover, .color4:hover,
+.color5:hover, .color6:hover, .color7:hover, .color8:hover,
+.color9:hover, .color10:hover, .color11:hover, .color12:hover {
+	cursor: pointer;
+	opacity: 0.7;
+	margin: 0px;
+	width: 29px;
+	height: 29px;
+}

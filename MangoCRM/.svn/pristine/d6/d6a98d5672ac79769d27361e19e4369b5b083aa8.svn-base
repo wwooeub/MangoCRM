@@ -1,0 +1,7 @@
+package com.smart.mango.web.inside.dao;
+
+
+public interface IDepartDao {
+
+
+}

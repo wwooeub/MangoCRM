@@ -1,0 +1,9 @@
+package com.smart.mango.batch.service;
+
+public interface IBatchService {
+
+	public void randomMachine() throws Throwable;
+
+	public void cmpMachineEnd() throws Throwable;
+
+}

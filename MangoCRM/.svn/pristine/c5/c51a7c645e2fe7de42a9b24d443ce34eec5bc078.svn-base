@@ -1,0 +1,12 @@
+package com.smart.mango.web.inside.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smart.mango.web.inside.dao.IBssDetDao;
+
+@Service
+public class BssDetService implements IBssDetService {
+	@Autowired
+	public IBssDetDao iBssDetDao;
+}

@@ -1,0 +1,36 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface IScheDao {
+
+	void insertSche(HashMap<String, String> params) throws Throwable;
+
+	void insertOpin(HashMap<String, String> params) throws Throwable ;
+
+	List<HashMap<String, String>> scheList(HashMap<String, String> params) throws Throwable ;
+
+	int getClientCnt(HashMap<String, String> params) throws Throwable ;
+
+	List<HashMap<String, String>> getClientList(HashMap<String, String> params) throws Throwable ;
+
+	void insertScheClient(HashMap<String, String> params) throws Throwable;
+
+	int getScheNo(HashMap<String, String> params) throws Throwable;
+
+	HashMap<String, String> getScheData(HashMap<String, String> params);
+
+	HashMap<String, String> getCiData(HashMap<String, String> params);
+
+	List<HashMap<String, String>> getOpinList(HashMap<String, String> params) throws Throwable ;
+
+	int getOpinCnt(HashMap<String, String> params) throws Throwable ;
+
+	void deleteOpin(HashMap<String, String> params) throws Throwable ;
+
+	List<HashMap<String, String>> getRadioList(HashMap<String, String> params) throws Throwable ;
+
+	List<HashMap<String, String>> getOptionList(HashMap<String, String> params) throws Throwable ;
+
+}

@@ -1,0 +1,11 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+
+public interface IScheService {
+
+	void insertSche(HashMap<String, String> params) throws Throwable ;
+
+	void insertOpin(HashMap<String, String> params) throws Throwable ;
+
+}

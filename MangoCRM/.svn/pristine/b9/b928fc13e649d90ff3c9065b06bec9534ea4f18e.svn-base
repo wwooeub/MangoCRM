@@ -1,0 +1,360 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<c:import url="/header"></c:import>
+<style type="text/css">
+/*
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+/*버튼의 hover입니다.*/
+.srch:hover {
+	background-color: #292929;
+	cursor: pointer;
+}
+
+.content_srch_txt {
+	display: inline-block;
+	width: 200px;
+	height: 25px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	float: right;
+	border-radius: 5px;
+}
+
+.content_srch_btn {
+	display: inline-block;
+	width: 1059px;
+	height: 50px;
+}
+
+.content_srch_DD {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	float: right;
+}
+
+.srch_add:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+
+/* 리드 카드보기 가운데부분  */
+.business_mid {
+	width: 1200px;
+	height: 700px;
+	margin-top: 58px;
+}
+
+/* Unqualified, New, Working, Nurturing, Conversion 단계별 */
+.business_mid_stat {
+	display: inline-block;
+	width: calc(20% - 5px);
+	height: 100%;
+	vertical-align: top;
+	text-align: center;
+}
+
+.business_mid_stat_title {
+	display: inline-block;
+	width: 190px;
+	line-height: 40px;
+	border-radius: 5px;
+	background-color: #F2CB07;
+	border: 0px solid #c5960a;
+	color: #595959;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.business_mid_stat_title:hover {
+	box-shadow: 1px 1px 8px #c8c8c8;
+	cursor: pointer;
+}
+
+/* 카드 내부 */
+.business_card {
+	display: inline-block;
+	width: 180px;
+	height: 100px;
+	background-color: #FFFFFF;
+	border: 1px solid #d0d0d0;
+	border-radius: 3px;
+	margin-top: 10px;
+	text-align: left;
+	padding: 5pt 3pt;
+}
+
+.business_card:hover {
+	box-shadow: 1px 1px 8px #c8c8c8;
+	cursor: pointer;
+}
+
+/* 카드 내부 리드 이름 */
+.business_card_name {
+	display: inline-block;
+	width: 80%;
+	height: auto;
+	color: #F2B807;
+	padding-left: 5px;
+	font-size: 12pt;
+	font-weight: bold;
+	vertical-align: top;
+	margin-bottom: 10px;
+}
+
+/* 카드 버튼 div*/
+.business_card_btn {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	text-align: right;
+	vertical-align: top;
+	border: 0px solid #000000;
+	border-radius: 3px;
+	background-color: #F2B807;
+	margin-top: 3px;
+}
+
+.business_card_btn:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+
+/* 회사명, 전화번호 */
+.business_card_manager, .business_card_progdate, .business_card_company
+	{
+	font-size: 10pt;
+	text-indent: 5pt;
+	color: #595959;
+	margin-bottom: 5px;
+}
+
+/* 수직 구분선 */
+.vertical_line {
+	display: inline-block;
+	width: 1px;
+	height: 100%;
+	background-color: #d0d0d0;
+	border: 0px solid #000000;
+	border-radius: 1px;
+	margin-top: 40px;
+}
+/* 입력폼의 기본 스타일 지정 */
+.input_style_normal {
+	font-size: 10pt;
+	text-indent: 5px;
+	border: 1px solid #cacaca;
+	padding: 0px;
+}
+/* 입력폼의 기본 크기 */
+.input_size_normal {
+	width: 100%;
+	height: 30px;
+}
+/* 입력폼 가로 130px */
+.input_size_130w {
+	display: inline-block;
+	width: 130px;
+	height: 30px;
+}
+/* 입력폼 가로 300px */
+.input_size_400w {
+	display: inline-block;
+	width: 400px;
+	height: 30px;
+}
+/* 입력폼 크기변경 제한 */
+.input_min_mix {
+	width: 100%;
+	max-width: 885px;
+	min-width: 885px;
+	height: 60px;
+	min-height: 60px;
+}
+/* 읽기 전용일때 입력폼 스타일 */
+.is_read_only {
+	background-color: #e0e0e0;
+}
+/* 강조 텍스트 css */
+.acc_txt {
+	color: #ff3737;
+	font-size: 10pt;
+	font-weight: 800;
+}
+
+/* 작은 사이즈의 드랍다운리스트 스타일 */
+.dropdown_small {
+	width: 100px;
+	height: 30px;
+}
+
+.srch_cld {
+	width: 30px;
+	height: 50px;
+	background-color: #FFFFFF;
+	float: right;
+	text-align: center;
+}
+
+.business_card>img {
+	width: 30px;
+	height: 30px;
+	margin-top: 35px;
+	margin-left: 75px;
+}
+
+.business_mid_stat_title>img {
+	width: 15px;
+	height: 15px;
+	margin-top: 2px;
+}
+
+.cal_btn {
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">18</c:param>
+	</c:import>
+	<div class="title_area">부서관리</div>
+	<div class="content_area">
+		<!-- 여기에 내용을 구현 -->
+
+		<div class="business_mid">
+			<!-- 수직 구분선 -->
+			<div class="vertical_line"></div>
+			<!-- 부서 영역 시작 -->
+			<div class="business_mid_stat">
+				<div class="business_mid_stat_title">부서명1</div>
+				<!-- 리드 카드 형식  -->
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<!-- 리드 카드 형식 끝  -->
+
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<!-- 팀 추가 리드 카드 -->
+				<div class="business_card">
+					<img src="./images/common/plus_btn.png" class="cal_btn" />
+				</div>
+				<!-- 리드 카드  끝  -->
+			</div>
+			<!-- 부서 영역 끝 -->
+			<div class="vertical_line"></div>
+			<div class="business_mid_stat">
+				<div class="business_mid_stat_title">부서명2</div>
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<div class="business_card">
+					<img src="./images/common/plus_btn.png" class="cal_btn" />
+				</div>
+			</div>
+			<div class="vertical_line"></div>
+			<div class="business_mid_stat">
+				<div class="business_mid_stat_title">부서명3</div>
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<div class="business_card">
+					<img src="./images/common/plus_btn.png" class="cal_btn" />
+				</div>
+			</div>
+			<div class="vertical_line"></div>
+			<div class="business_mid_stat">
+				<div class="business_mid_stat_title">부서명4</div>
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<div class="business_card">
+					<div class="business_card_name_title">
+						<div class="business_card_name">팀명1</div>
+						<div class="business_card_btn"></div>
+					</div>
+					<div class="business_card_company">팀장 :</div>
+					<div class="business_card_manager">인원수 :</div>
+					<div class="business_card_progdate">주요업무 :</div>
+				</div>
+				<div class="business_card">
+					<img src="./images/common/plus_btn.png" class="cal_btn" />
+				</div>
+			</div>
+			<div class="vertical_line"></div>
+			<!-- 부서 추가 단계 시작 -->
+			<div class="business_mid_stat">
+				<div class="business_mid_stat_title">
+					<img src="./images/common/plus_btn.png" class="cal_btn" />
+				</div>
+			</div>
+			<!-- 부서 추가 단계 끝 -->
+			<div class="vertical_line"></div>
+		</div>
+	</div>
+</body>
+</html>

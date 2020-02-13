@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="depart">
+<select id="getSuch" parameterType="hashmap" resultType="hashmap">
+	SELECT *
+FROM DEPART D INNER JOIN TEAM T
+ON D.DEPART_NO = T.DEPART_NO
+INNER JOIN EMP_INFO EI
+ON T.TEAM_NO = EI.TEAM_NO
+INNER JOIN AUTHOR A
+ON EI.AUTHOR_NO = A.AUTHOR_NO
+			<if test="searchTxt != null and searchTxt !=''">
+				<choose>
+					<when test="searchGbn2 eq 0">
+						WHERE A.AUTHOR_NO = 2 OR A.AUTHOR_NO = 4 
+						AND (EMP_NAME LIKE '%' ||  #{searchTxt} || '%')
+						OR (DEPART_NAME LIKE '%' ||  #{searchTxt} || '%'
+						AND TEAM_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+					<when test="searchGbn2 eq 1">
+						WHERE A.AUTHOR_NO = 2 OR A.AUTHOR_NO = 4 
+						AND (EMP_NAME LIKE '%' ||  #{searchTxt} || '%')
+					</when>
+					<when test="searchGbn2 eq 2">
+						WHERE DEPART_NAME LIKE '%' ||  #{searchTxt} || '%'
+						AND TEAM_NAME LIKE '%' ||  #{searchTxt} || '%'
+					</when>
+				</choose>
+			</if>
+</select>
+<select id="getDepartList" parameterType="hashmap" resultType="hashmap">
+SELECT *
+FROM DEPART D INNER JOIN TEAM T
+ON D.DEPART_NO = T.DEPART_NO
+INNER JOIN EMP_INFO EI
+ON T.TEAM_NO = EI.TEAM_NO
+INNER JOIN AUTHOR A
+ON EI.AUTHOR_NO = A.AUTHOR_NO
+</select>
+</mapper>

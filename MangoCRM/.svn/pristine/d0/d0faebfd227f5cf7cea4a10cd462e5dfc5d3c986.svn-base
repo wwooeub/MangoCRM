@@ -1,0 +1,51 @@
+package com.smart.mango.web.inside.controller;
+
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.smart.mango.common.service.IPagingService;
+import com.smart.mango.web.common.service.ICommonService;
+import com.smart.mango.web.inside.service.IBssPpsService;
+@Controller
+public class BssPpsController {
+
+	@Autowired
+	public IBssPpsService iBssPpsService;
+	
+	@Autowired
+	public IPagingService iPagingService;
+	
+	@Autowired
+	public ICommonService iCommonService;
+	
+	@RequestMapping(value = "/bssPpsList")
+	public ModelAndView bssPpsList(HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav) {
+		
+		
+		mav.setViewName("bssPps/bssPpsList");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/bssPpsAdd")
+	public ModelAndView bssPpsAdd(HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav) {
+		
+		
+		mav.setViewName("bssPps/bssPpsAdd");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/bssPpsEdit")
+	public ModelAndView bssPpsEdit(HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav) {
+		
+		
+		mav.setViewName("bssPps/bssPpsEdit");
+		return mav;
+	}
+}

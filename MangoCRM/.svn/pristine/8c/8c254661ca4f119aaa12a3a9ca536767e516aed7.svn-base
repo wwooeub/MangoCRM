@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+	<select id="getEmpList" parameterType="hashmap" resultType="hashmap">
+		SELECT SQ.NO, SQ.NAME, SQ.EMAIL, SQ.DEPART_NAME, SQ.POSI_NAME, SQ.FORM, SQ.PHONE, SQ.JDATE, SQ.ADDR
+		FROM ( 	SELECT E.EMP_NO AS NO, E.EMP_NAME AS NAME, E.EMP_EMAIL AS EMAIL, D.DEPART_NAME, 
+					   EP.EMP_POSI_NAME AS POSI_NAME, CC.CODE_NAME AS FORM, E.EMP_PHONE AS PHONE, 
+					   TO_CHAR(E.EMP_JOIN_DATE, 'YYYY-MM-DD') AS JDATE,
+					   (E.EMP_ADDR || ' ' || E.EMP_DETAIL_ADDR) AS ADDR,
+              		   ROW_NUMBER() OVER(ORDER BY E.EMP_NO DESC) AS RNUM
+       			FROM EMP_INFO E INNER JOIN TEAM T
+       							ON E.TEAM_NO = T.TEAM_NO
+       							INNER JOIN DEPART D
+       							ON T.DEPART_NO = D.DEPART_NO
+       							INNER JOIN EMP_POSI EP
+       							ON E.EMP_POSI_NO = EP.EMP_POSI_NO
+       							INNER JOIN COMMON_CODE CC
+       							ON E.EMP_FORM = CC.CODE_S_CATE
+       							   AND CC.CODE_L_CATE = 1
+       							
+       			WHERE E.EMP_RESIGN_DATE IS NULL
+				<if test="searchTxt != null and searchTxt != ''">
+					<choose>
+						<when test="searchGbn == 0">
+							AND E.EMP_NO LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_EMAIL LIKE '%' || #{searchTxt} || '%'
+							OR D.DEPART_NAME LIKE '%' || #{searchTxt} || '%'
+							OR EP.EMP_POSI_NAME LIKE '%' || #{searchTxt} || '%'
+							OR CC.CODE_NAME LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_PHONE LIKE '%' || #{searchTxt} || '%'
+							OR (E.EMP_ADDR || ' ' || E.EMP_DETAIL_ADDR) LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn == 1">AND E.EMP_NO LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 2">AND E.EMP_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 3">AND E.EMP_EMAIL LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 4">AND D.DEPART_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 5">AND EP.EMP_POSI_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 6">AND CC.CODE_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 7">AND E.EMP_PHONE LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 8">AND (E.EMP_ADDR || ' ' || E.EMP_DETAIL_ADDR) LIKE '%' || #{searchTxt} || '%'</when>	
+					</choose>
+				</if>
+       	) SQ
+		WHERE SQ.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<select id="getEmpCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+       	FROM EMP_INFO E INNER JOIN TEAM T
+       					ON E.TEAM_NO = T.TEAM_NO
+       					INNER JOIN DEPART D
+       					ON T.DEPART_NO = D.DEPART_NO
+       					INNER JOIN EMP_POSI EP
+       					ON E.EMP_POSI_NO = EP.EMP_POSI_NO
+       					INNER JOIN COMMON_CODE CC
+       					ON E.EMP_FORM = CC.CODE_S_CATE
+       					AND CC.CODE_L_CATE = 1		
+       			WHERE E.EMP_RESIGN_DATE IS NULL
+				<if test="searchTxt != null and searchTxt != ''">
+					<choose>
+						<when test="searchGbn == 0">
+							AND E.EMP_NO LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_NAME LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_EMAIL LIKE '%' || #{searchTxt} || '%'
+							OR D.DEPART_NAME LIKE '%' || #{searchTxt} || '%'
+							OR EP.EMP_POSI_NAME LIKE '%' || #{searchTxt} || '%'
+							OR CC.CODE_NAME LIKE '%' || #{searchTxt} || '%'
+							OR E.EMP_PHONE LIKE '%' || #{searchTxt} || '%'
+							OR (E.EMP_ADDR || ' ' || E.EMP_DETAIL_ADDR) LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn == 1">AND E.EMP_NO LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 2">AND E.EMP_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 3">AND E.EMP_EMAIL LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 4">AND D.DEPART_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 5">AND EP.EMP_POSI_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 6">AND CC.CODE_NAME LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 7">AND E.EMP_PHONE LIKE '%' || #{searchTxt} || '%'</when>
+						<when test="searchGbn == 8">AND (E.EMP_ADDR || ' ' || E.EMP_DETAIL_ADDR) LIKE '%' || #{searchTxt} || '%'</when>	
+					</choose>
+				</if>
+	</select>
+	
+	<select id="getPosiList" parameterType="hashmap" resultType="hashmap">
+		SELECT EMP_POSI_NO AS POSI_NO, EMP_POSI_NAME AS POSI_NAME
+		FROM EMP_POSI
+		WHERE EMP_POSI_NO &gt; 0
+	</select>
+	
+	<select id="getFormList" parameterType="hashmap" resultType="hashmap">
+		SELECT CODE_S_CATE AS FORM_NO, CODE_NAME AS FORM_NAME
+		FROM COMMON_CODE
+		WHERE CODE_L_CATE = 1
+	</select>
+	
+	<select id="getDepartList" parameterType="hashmap" resultType="hashmap">
+		SELECT DEPART_NO, DEPART_NAME
+		FROM DEPART
+	</select>
+	
+	<select id="getAuthorList" parameterType="hashmap" resultType="hashmap">
+		SELECT AUTHOR_NO AS AUTH_NO, AUTHOR_NAME AS AUTH_NAME
+		FROM AUTHOR
+	</select>
+</mapper>

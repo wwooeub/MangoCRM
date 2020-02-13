@@ -1,0 +1,320 @@
+@charset "UTF-8";
+     table {
+   width: 1200px;   
+   height: 400px;
+   text-align: center;
+   border-collapse: collapse;
+   font-size : 10pt;
+   font-weight: bold;
+}
+
+/*버튼영역*/
+.content_btn {
+   width : 1200px;
+   height : 50px;
+}
+/*버튼을 div로 만들었습니다.
+  버튼 속성입니다. 
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+.content_btn > div {
+   display: table;
+   width : 80px;
+   height: 25px;
+   font-size: 10pt;
+   color: #595959;
+   text-align : center;
+   border-radius : 5px;
+    float : right; 
+   background-color : #F2B807;
+   padding-top : 5px;
+   margin-top : 20px;
+   margin-left : 10px;
+}
+/*버튼의 hover입니다.*/
+.content_btn > div:hover {
+   background-color : #F2CB07;
+   cursor : pointer;
+}
+/*버튼을 div로 만들었습니다.
+  버튼 속성입니다.
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+.content_srch{
+   width : 1200px;
+   height : 50px;
+}
+.content_srch_btn > div {
+   display: table;
+   width : 80px;
+   height: 25px;
+   font-size: 10pt;
+   font-weight: bold;
+   color: white;
+   text-align : center;
+   border-radius : 5px;
+    float : right; 
+   background-color : #595959;
+   padding-top : 5px;
+   margin-top : 10px;
+   margin-left : 10px;
+}
+/*버튼의 hover입니다.*/
+.content_srch_btn > div:hover {
+   background-color : #292929;
+   cursor : pointer;
+}
+.content_srch_txt{
+   display : inline-block;
+   width: 200px;
+   height: 25px;
+   font-size: 10pt;
+   margin-top : 10px;
+   margin-left : 10px;
+   border : 1px solid #ccc;
+   float : right; 
+   border-radius : 5px;
+}
+
+.content_srch_btn {
+   display : inline-block;
+   width : 1200px;
+   height : 50px;
+}
+.content_srch_DD{
+   display : inline-block;
+   width: 100px;
+   height: 30px;
+   font-size: 10pt;
+   margin-top : 10px;
+   margin-left : 10px;
+   border : 1px solid #ccc;
+   border-radius : 5px;
+   float : right;
+
+}
+.content_srch_DD1{
+   display : none;
+}
+.cntPick {
+	display : inline-block;
+	width : 200px;
+	height : 25px;
+    margin-top : 10px;
+    margin-left : 10px;
+    float : left;
+    border: 0;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #595959;
+}
+.sample_1 {
+   	width: 100%;
+   	height: 50px;
+   	border-bottom: 1px solid #cccccc;
+}
+.sample_2 {
+   	width: 100%;
+   	height: 50px;
+   	border-bottom: 1px solid #cccccc;
+}
+.sample_2 input{
+	outline: none;
+}
+
+.check {
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 75px;
+}
+.sample_title1{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 75px;
+}
+.sample_title2 {
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 300px;
+}
+.sample1_txt {
+	border : 0;
+	width: 150px;
+	
+}
+.sample_title3 {
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 150px;
+	
+}
+.sample2_txt {
+	border : 0;
+	width: 150px;
+}
+.sample_title4{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 150px;
+
+}
+.sample3_txt {
+	border : 0;
+	width: 150px;
+
+}
+.sample_title5{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 150px;
+}
+.sample4_txt {
+	border : 0;
+	width: 150px;
+
+}
+.sample_title6 {
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 100px;
+}
+.sample5_txt {
+	border : 0;
+	width: 100px;
+
+}
+.sample_title7{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 100px;
+
+}
+.sample6_txt {
+	border : 0;
+	width: 100px;
+
+}
+.sample_title8{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 200px;
+
+}
+.sample7_txt {
+	border : 0;
+	width: 200px;
+
+}
+.sample_title9{
+	background-color : #595959;
+	font-size : 10pt;
+	font-weight: bold;
+	color : #ffffff;
+	width: 200px;
+}
+.sample8_btn{
+   float: right;
+   display: inline-block;
+   height: 20px;
+   border : 1px solid #cccccc;
+   background-color: #ffffff;
+   border-radius: 3px;
+   cursor: pointer;
+   width: 50px;
+   height: 20px;
+   font-size: 10pt;
+   font-weight: bold;
+   color: #595959;
+   padding: 2px;
+   margin-right: 27px;
+}
+
+.departments_btn:hover {
+   background-color: #F2CB07;
+}
+
+.content_bottom{
+   display: block;
+   height : 40px;
+   padding : 0px;
+   width: 1200px;
+   font-size : 0px;
+   margin-top: 30px;
+   
+}
+.content_bottom_1_span {
+
+   display: inline-block;
+   position : relative;
+   margin-left : 432px;
+}
+.bottom_btn_1 {
+   display : inline-block;
+   width : 40px;
+   height : 40px;
+   border : 0px;
+   margin-left : 2px;
+   background-color : #595959;
+   color: #F2F2F2;
+}
+/* .bottom_btn_2 {
+   display : inline-block;
+   width : 40px;
+   height : 40px;
+   margin-left : 2px;
+   border : 0px;
+   background-color : #595959;
+   color: #F2F2F2;
+} */
+.bottom_btn_1:hover {
+   background-color: #F2CB07;
+   color: #595959;
+   cursor : pointer;
+}
+.bottom_btn_2:hover {
+   background-color: #F2CB07;
+   color: #595959;
+   cursor : pointer;
+  }
+.circle{
+display:inline-block;
+width:30px;
+height:30px;
+border-radius:50%;
+background:#595959;
+font-size:16px;
+color:white;
+text-align:center;  
+line-height:30px;
+font-weight: bold;  
+}
+.circle1{
+display:inline-block;
+width:30px;
+height:30px;
+border-radius:50%;
+background:#F2CB07;
+font-size:16px;
+color:black;
+text-align:center;  
+line-height:30px;
+font-weight: bold;
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bss">
+
+<select id="getBssList" parameterType="hashmap" resultType="hashmap">
+	SELECT BC.CHN_NAME, CP.COMP_NAME, EI.EMP_NAME, PD.PROD_NAME, BC.PROG_NO
+	FROM BSS_CHN BC INNER JOIN LEAD L
+						ON BC.LEAD_NO = L.LEAD_NO
+					INNER JOIN CLIENT C
+						ON L.CLIENT_NO = C.CLIENT_NO
+					INNER JOIN COMP CP
+						ON C.COMP_NO = CP.COMP_NO
+					INNER JOIN EMP_INFO EI
+						ON L.EMP_NO = EI.EMP_NO
+					INNER JOIN CHN_PROD CPD
+						ON BC.CHN_NO = CPD.CHN_NO
+					INNER JOIN PROD PD
+						ON CPD.PROD_NO = PD.PROD_NO
+</select>
+
+<select id="getSuch" parameterType="hashmap" resultType="hashmap">
+	SELECT *
+	FROM BSS_CHN BC INNER JOIN LEAD L
+						ON BC.LEAD_NO = L.LEAD_NO
+					INNER JOIN CLIENT C
+						ON L.CLIENT_NO = C.CLIENT_NO
+					INNER JOIN COMP CP
+						ON C.COMP_NO = CP.COMP_NO
+					INNER JOIN EMP_INFO EI
+						ON L.EMP_NO = EI.EMP_NO
+					INNER JOIN CHN_PROD CPD
+						ON BC.CHN_NO = CPD.CHN_NO
+					INNER JOIN PROD PD
+						ON CPD.PROD_NO = PD.PROD_NO
+			<if test="searchTxt != null and searchTxt !=''">
+			AND (CHN_NAME LIKE '%' ||  #{searchTxt} || '%'
+			OR COMP_NAME LIKE '%' ||  #{searchTxt} || '%'
+			OR EMP_NAME LIKE '%' ||  #{searchTxt} || '%'
+			OR PROD_NAME LIKE '%' ||  #{searchTxt} || '%')
+			</if>
+</select>
+
+<!-- 영업 테이블 리스트 페이징 -->
+<select id="getBssCnt" parameterType="hashmap" resultType="Integer">
+	SELECT COUNT(*) AS CNT
+	FROM BSS_CHN B INNER JOIN LEAD L
+     ON B.EMP_NO = L.EMP_NO
+               INNER JOIN COMP C
+     ON L.EMP_NO = C.EMP_NO
+               INNER JOIN CLIENT CL
+     ON L.EMP_NO = CL.EMP_NO
+               LEFT OUTER JOIN BSS_CTRACT BC
+     ON B.CHN_NO = BC.CHN_NO
+               INNER JOIN EMP_INFO E
+     ON L.EMP_NO = E.EMP_NO
+               INNER JOIN TEAM T
+     ON E.TEAM_NO = T.TEAM_NO
+               INNER JOIN DEPART D
+     ON T.DEPART_NO = D.DEPART_NO
+</select>
+
+<!-- 영업 테이블 리스트 목록 -->
+<select id="getBss" parameterType="hashmap" resultType="hashmap">
+     
+     SELECT B.CHN_NO, B.CHN_NAME, TO_CHAR(B.CHN_DATE, 'YYYY-MM-DD') AS CHN_DATE,
+       CL.CLIENT_NAME, 
+       CASE WHEN BC.CTRACT_DATE IS NULL
+       THEN ' '
+       ELSE TO_CHAR(BC.CTRACT_DATE, 'YYYY-MM-DD')
+       END CTRACT_DATE, B.EXPECT_SALES,
+       P.PROG_NAME, D.DEPART_NAME, E.EMP_NAME, C.COMP_NAME
+	 FROM BSS_CHN B INNER JOIN LEAD L
+     ON B.LEAD_NO = L.LEAD_NO
+               INNER JOIN CLIENT CL
+     ON L.CLIENT_NO = CL.CLIENT_NO
+               INNER JOIN COMP C
+     ON C.COMP_NO = CL.COMP_NO
+               INNER JOIN EMP_INFO E
+     ON L.EMP_NO = E.EMP_NO
+               INNER JOIN TEAM T
+     ON E.TEAM_NO = T.TEAM_NO
+               INNER JOIN DEPART D
+     ON T.DEPART_NO = D.DEPART_NO
+               INNER JOIN BSS_PROG P
+     ON B.PROG_NO = P.PROG_NO
+               LEFT OUTER JOIN BSS_CTRACT BC
+     ON B.CHN_NO = BC.CHN_NO
+     
+</select>
+
+</mapper>

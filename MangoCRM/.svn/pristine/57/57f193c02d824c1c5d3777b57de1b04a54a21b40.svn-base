@@ -1,0 +1,25 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class DepartDao implements IDepartDao {
+	@Autowired
+	public SqlSession sqlSession;
+
+	@Override
+	public List<HashMap<String, String>> getSuch(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("depart.getSuch",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getDepartList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("depart.getDepartList",params);
+	}
+
+}

@@ -1,0 +1,30 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smart.mango.web.common.dao.ICommonDao;
+import com.smart.mango.web.inside.dao.ICompDao;
+import com.smart.mango.web.inside.dao.IEmpDao;
+
+@Service
+public class CompService implements ICompService {
+	@Autowired
+	public ICompDao iCompDao;
+	@Autowired
+	public ICommonDao iCommonDao;
+
+	@Override
+	public List<HashMap<String, String>> getCompList(HashMap<String, String> params) throws Throwable {
+		return iCompDao.getCompList(params);
+	}
+
+	@Override
+	public int getCompCnt(HashMap<String, String> params) throws Throwable {
+		return iCompDao.getCompCnt(params);
+	}
+	
+}

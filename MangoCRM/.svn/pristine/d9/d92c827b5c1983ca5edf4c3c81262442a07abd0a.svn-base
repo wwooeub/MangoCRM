@@ -1,0 +1,170 @@
+table_txt2@charset "UTF-8";
+
+.content_table{
+   width : 1080px;
+   border : 0px;
+   vertical-align : top;
+}
+* {
+   box-sizing: border-box;
+   font-family: 'Gothic A1', sans-serif;
+}
+
+/*버튼영역*/
+.content_btn {
+   width : 1080px;
+   height : 50px;
+}
+/*버튼을 div로 만들었습니다.
+  버튼 속성입니다.
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+.content_btn > div {
+   display: table;
+   width : 80px;
+   height: 25px;
+   font-size: 10pt;`
+   color: #595959;
+   text-align : center;
+   border-radius : 5px;
+   float : right;
+   background-color : #F2B807;
+   padding-top : 5px;
+   margin-top : 10px;
+   margin-left : 10px;
+}
+/*버튼의 hover입니다.*/
+.content_btn > div:hover {
+   background-color : #F2CB07;
+   cursor : pointer;
+}
+
+.btn {
+   margin-right : 10px;
+}
+/*테이블 속성입니다.*/
+table{
+   width:1080px;
+   border-collapse : collapse;
+   padding : 0px;
+   margin : 0px;
+   border-spacing : 0px;
+   font-size : 10pt;
+   border-top : 2px solid #F2CB07;
+}
+tr{
+   border-bottom : 1px solid #CCC;
+   height: 70px;
+}
+/*주제열입니다.
+*/
+th {
+   background-color : #EEEEEE;
+   border-right : 1px solid #CCC;
+   height : 45px;
+   padding : 0px;
+}
+/*내용열입니다.*/
+td{
+   padding : 10px 15px;
+}
+/*내용열에 들어가는 텍스트 박스의 속성입니다.
+  기본적으로 내용열에 텍스트박스만 있을때 쓰는 속성입니다.
+*/
+.table_txt{
+   display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+}
+.table_txt:focus{
+   border: 1px solid #F2B807;
+    box-shadow: none;
+    outline: none;
+   
+}
+.table_txt1:focus{
+   border: 1px solid #F2B807;
+    box-shadow: none;
+    outline: none;
+   
+}
+/*내용열에 텍스트박스와 버튼이 같이 들어갈 경우 사용하는 속성입니다.*/
+.table_txt1{
+   display: inline-block;
+    vertical-align: top;
+    /*버튼과 같이해서 width를 조절해주세요.*/
+    width: 80%;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+}
+/*여러열이 변동이 되면  txt1, txt2같이 표시해주세요.*/
+.table_txt2{
+   display: inline-block;
+    vertical-align: top;
+    width: 85%;
+    height: 300px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+    resize:none;
+}
+.table_txt2:focus{
+   border: 1px solid #F2B807;
+    box-shadow: none;
+    outline: none;
+   
+}
+/*내용열에 들어가는 버튼의 속성입니다.*/
+.bottom_btn_2 {
+   display : inline-block;
+   width : 60px;
+   height : 35px;
+   margin-left : 2px;
+   border : 0px;
+   background-color : #595959;
+   color: #F2F2F2;
+   float : right;
+   border-radius : 5px;
+}
+.bottom_btn_2:hover {
+   background-color: #F2CB07;
+   color: #595959;
+   cursor : pointer;
+}
+.btn_area {
+   width: 1200px;
+   height: 50px;
+}
+.next_Btn {
+   display: table;
+   width : 80px;
+   height: 30px;
+   font-size: 10pt;
+   color: #595959;
+   text-align : center;
+   border-radius : 7px;
+   float : right;
+   background-color : #F2B807;
+   padding-top : 5px;
+   margin-top : 10px;
+   margin-left : 10px;
+}
+.next_Btn:hover {
+   background-color : #F2CB07;
+   cursor : pointer;
+}

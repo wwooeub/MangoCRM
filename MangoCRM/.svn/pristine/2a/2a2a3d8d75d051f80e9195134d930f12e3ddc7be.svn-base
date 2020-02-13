@@ -1,0 +1,11 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface ICompService {
+
+	public List<HashMap<String, String>> getCompList(HashMap<String, String> params) throws Throwable;
+	public int getCompCnt(HashMap<String, String> params) throws Throwable;
+	
+}

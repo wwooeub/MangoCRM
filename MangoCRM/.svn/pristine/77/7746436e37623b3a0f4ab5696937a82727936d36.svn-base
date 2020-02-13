@@ -1,0 +1,26 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ScheDao implements IScheDao{
+	
+	@Autowired
+	public SqlSession sqlSession;
+
+	@Override
+	public void insertSche(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		sqlSession.insert("sche.insertSche",params);
+	}
+
+	@Override
+	public void insertOpin(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		sqlSession.insert("sche.insertOpin",params);
+	}
+}

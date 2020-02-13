@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Client">
+	<!-- 고객등록 -->
+	<insert id="clientinsertData" parameterType="hashmap">
+		INSERT INTO CLIENT(CLIENT_NO,
+		CLIENT_NAME
+		<if test="txt__client_company != null and txt__client_company != ''">
+			,COMP_NO
+		</if>
+		<if test="txt_client_depart != null and txt_client_depart != ''">
+			,CLIENT_DEPART_NAME
+		</if>
+		<if test="txt_client_position != null and txt_client_position != ''">
+			,CLIENT_POSI_NAME
+		</if>
+			,CLIENT_PH
+		<if test="txt_client_ln != null and txt_client_ln != ''">
+			,CLIENT_LN
+		</if>
+		<if test="txt_client_fax != null and txt_client_fax != ''">
+			,CLIENT_FAX
+		</if>
+		<if test="txt_client_web != null and txt_client_web != ''">
+			,CLIENT_WEBSITE
+		</if>
+			,CLIENT_EMAIL
+		<if test="dd_client_grade != null and dd_client_grade != ''">
+			,CC_GRADE_NO
+		</if>
+		<if test="chk_client_cp != checked and chk_client_cp != ''">
+			,CLIENT_CP
+		</if>
+		<if test="txt_client_empno != null and txt_client_empno != ''">
+			,EMP_NO
+		</if>
+		)
+		VALUES( CLIENT_SEQ.NEXTVAL  
+			,#{txt_client_name}		
+		<if test="txt__client_company != null and txt__client_company != ''">
+			,#{txt__client_company}	
+		</if>
+		<if test="txt_client_depart != null and txt_client_depart != ''">
+			,#{txt_client_depart}		
+		</if>
+		<if test="txt_client_position != null and txt_client_position != ''">
+			,#{txt_client_position}		
+		</if>
+			,#{txt_client_ph}
+		<if test="txt_client_ln != null and txt_client_ln != ''">
+			,#{txt_client_ln}		
+		</if>
+		<if test="txt_client_fax != null and txt_client_fax != ''">
+			,#{txt_client_fax}
+		</if>
+		<if test="txt_client_web != null and txt_client_web != ''">
+			,#{txt_client_web}
+		</if>
+		    ,#{txt_client_email}
+		<if test="dd_client_grade != null and dd_client_grade != ''">
+			,#{dd_client_grade}
+		</if>
+		<if test="chk_client_cp != checked and chk_client_cp != ''">
+			,#{chk_client_cp}
+		</if>
+		<if test="txt_client_empno != null and txt_client_empno != ''">
+			,#{txt_client_empno}
+		</if>
+		)
+	</insert>
+	<select id="getClientGrade" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM COMP_CLIENT_GRADE
+	</select>
+	<!-- 담당자 카운트 -->
+	<select id="getEmpCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+       	FROM EMP_INFO E INNER JOIN TEAM T
+       					ON E.TEAM_NO = T.TEAM_NO
+       					INNER JOIN DEPART D
+       					ON T.DEPART_NO = D.DEPART_NO
+       					INNER JOIN EMP_POSI EP
+       					ON E.EMP_POSI_NO = EP.EMP_POSI_NO
+       					INNER JOIN COMMON_CODE CC
+       					ON E.EMP_FORM = CC.CODE_S_CATE
+       					AND CC.CODE_L_CATE = 1		
+       			WHERE E.EMP_RESIGN_DATE IS NULL
+				<if test="txt_emp_search != null and txt_emp_search != ''">
+					AND E.EMP_NAME LIKE '%' || #{txt_emp_search} || '%'
+					OR T.TEAM_NAME LIKE '%' || #{txt_emp_search} || '%'
+					OR D.DEPART_NAME LIKE '%' || #{txt_emp_search} || '%'
+				</if>
+	</select>
+	<!-- 담당자 조회 -->
+	<select id="getEmpList" parameterType="hashmap" resultType="hashmap">
+		SELECT SQ.NO, SQ.NAME, SQ.EMAIL, SQ.DEPART_NAME,SQ.TEAM_NAME, SQ.POSI_NAME, SQ.FORM, SQ.PHONE, SQ.JDATE, SQ.ADDR
+		FROM ( 	SELECT E.EMP_NO AS NO, E.EMP_NAME AS NAME, E.EMP_EMAIL AS EMAIL, D.DEPART_NAME, T.TEAM_NAME,
+					   EP.EMP_POSI_NAME AS POSI_NAME, CC.CODE_NAME AS FORM, E.EMP_PHONE AS PHONE, 
+					   TO_CHAR(E.EMP_JOIN_DATE, 'YYYY-MM-DD') AS JDATE,
+					   (E.EMP_ADDR || ' ' || E.EMP_DETAIL_ADDR) AS ADDR,
+              		   ROW_NUMBER() OVER(ORDER BY E.EMP_NO DESC) AS RNUM
+       			FROM EMP_INFO E INNER JOIN TEAM T
+       							ON E.TEAM_NO = T.TEAM_NO
+       							INNER JOIN DEPART D
+       							ON T.DEPART_NO = D.DEPART_NO
+       							INNER JOIN EMP_POSI EP
+       							ON E.EMP_POSI_NO = EP.EMP_POSI_NO
+       							INNER JOIN COMMON_CODE CC
+       							ON E.EMP_FORM = CC.CODE_S_CATE
+       							   AND CC.CODE_L_CATE = 1
+       							
+       			WHERE E.EMP_RESIGN_DATE IS NULL
+				<if test="txt_emp_search != null and txt_emp_search != ''">
+					AND E.EMP_NAME LIKE '%' || #{txt_emp_search} || '%'
+					OR T.TEAM_NAME LIKE '%' || #{txt_emp_search} || '%'
+					OR D.DEPART_NAME LIKE '%' || #{txt_emp_search} || '%'
+				</if>
+       	) SQ
+		WHERE SQ.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	<!-- 고객사 카운트 -->
+	<select id="getCompCnt" parameterType="hashmap" resultType="Integer">
+			SELECT COUNT(*) AS CNT
+			FROM (SELECT C.COMP_NO, C.COMP_NAME, CS1.COMP_SECT_NAME AS SECT_NAME
+			      FROM COMP C INNER JOIN COMP_SECT CS1 
+			            ON C.COMP_SECT_NO = CS1.COMP_SECT_NO 
+			            INNER JOIN EMP_INFO E 
+			            ON C.EMP_NO = E.EMP_NO
+			            AND C.COMP_STAT_NO != 0 
+			            <if test="client_empty != '' and  client_empty != null ">
+			            LEFT JOIN CLIENT CL 
+			            ON C.COMP_NO = CL.COMP_NO 
+			            </if>
+			      WHERE 1=1 
+			      <if test="client_my != '' and  client_my != null ">
+			      AND C.EMP_NO = #{sEmpNo} 
+			      </if>
+			      <if test="client_empty != ''  and client_empty != null ">
+			      AND CL.COMP_NO IS NULL 
+			      </if>
+			      )
+			WHERE 1=1 
+			
+			<if test="searchTxt != null and searchTxt != ''">
+			AND COMP_NAME LIKE '%'||#{searchTxt}||'%' 
+			OR SECT_NAME LIKE '%'||#{searchTxt}||'%' 
+			</if>
+			
+			ORDER BY COMP_NO ASC 
+			
+	</select>
+	<select id="getCompList" parameterType="hashmap" resultType="hashmap">
+		SELECT COMP_NO, COMP_NAME,SECT_NAME
+			FROM (SELECT C.COMP_NO, C.COMP_NAME, CS1.COMP_SECT_NAME AS SECT_NAME, ROW_NUMBER() OVER(ORDER BY E.EMP_NO DESC) AS RNUM 
+			      FROM COMP C INNER JOIN COMP_SECT CS1 
+			            ON C.COMP_SECT_NO = CS1.COMP_SECT_NO 
+			            INNER JOIN EMP_INFO E 
+			            ON C.EMP_NO = E.EMP_NO
+			             AND C.COMP_STAT_NO != 0 
+			            <if test="client_empty != '' and  client_empty != null ">
+			            LEFT JOIN CLIENT CL 
+			            ON C.COMP_NO = CL.COMP_NO
+			            </if>
+			      WHERE 1=1 
+			       <if test="client_my != '' and  client_my != null ">
+			      AND C.EMP_NO = 1 
+			      </if>
+			      <if test="client_empty != '' and  client_empty != null ">
+			      AND CL.COMP_NO IS NULL 
+			      </if>
+			      )
+			WHERE 1=1
+			AND RNUM BETWEEN #{startCnt} AND #{endCnt}
+			<if test="searchTxt != null and searchTxt != ''">
+			AND COMP_NAME LIKE '%'||#{searchTxt}||'%' 
+			OR SECT_NAME LIKE '%'||#{searchTxt}||'%' 
+			</if>
+			
+			ORDER BY COMP_NO ASC
+	</select>
+	
+</mapper>

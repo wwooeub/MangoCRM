@@ -1,0 +1,21 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface IClientService {
+	
+	/* 고객 등록 */
+	void clientinsertData(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getClientGrade(HashMap<String, String> params)  throws Throwable;
+
+	int getEmpCnt(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getEmpList(HashMap<String, String> params) throws Throwable;
+
+	int getCompCnt(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getCompList(HashMap<String, String> params) throws Throwable;
+
+}

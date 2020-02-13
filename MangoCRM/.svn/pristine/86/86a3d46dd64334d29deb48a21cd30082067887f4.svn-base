@@ -1,0 +1,11 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface IBssDao {
+
+	public List<HashMap<String, String>> getBssList(HashMap<String, String> params) throws Throwable;
+
+
+}

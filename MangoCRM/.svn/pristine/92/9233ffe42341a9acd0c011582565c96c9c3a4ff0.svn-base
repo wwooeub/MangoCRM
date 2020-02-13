@@ -1,0 +1,20 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface IClientDao {
+
+	void clientinsertData(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getClientGrade(HashMap<String, String> params)  throws Throwable;
+
+	int getEmpCnt(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getEmpList(HashMap<String, String> params) throws Throwable;
+
+	int getCompCnt(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getCompList(HashMap<String, String> params) throws Throwable;
+
+}

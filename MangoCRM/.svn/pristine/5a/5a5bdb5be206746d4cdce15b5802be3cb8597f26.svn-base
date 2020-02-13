@@ -1,0 +1,113 @@
+package com.smart.mango.web.inside.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.smart.mango.common.bean.PagingBean;
+import com.smart.mango.common.service.IPagingService;
+import com.smart.mango.web.common.service.ICommonService;
+import com.smart.mango.web.inside.service.IClientService;
+import com.smart.mango.web.inside.service.IEmpService;
+
+@Controller
+public class ClientController {
+	@Autowired
+	public IClientService iClientService;
+	
+	@Autowired
+	public ICommonService iCommonService;
+	
+	@Autowired
+	public IPagingService iPagingService;
+	
+	@Autowired
+	public IEmpService iEmpService; 
+	
+	@RequestMapping(value = "/clientList")
+	public ModelAndView clientList(HttpSession session, ModelAndView mav) {
+		mav.setViewName("client/clientList");
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/clientAdd")
+	public ModelAndView clientAdd(HttpSession session, @RequestParam HashMap<String, String> params,ModelAndView mav) {
+		if(params.get("page") == null) {
+			params.put("page", "1");
+		}
+		mav.addObject("page", params.get("page"));
+		mav.setViewName("client/clientAdd");
+
+		return mav;
+	}
+	// 사원 목록 가져오기
+	@RequestMapping(value="/getEmppopListAjax", method=RequestMethod.POST, produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String getEmppopListAjax(@RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		
+		int cnt = iEmpService.getEmpCnt(params);
+		if(params.get("page") == null) {
+			params.put("page", "1");
+		}
+		System.out.println("params" + params);
+		PagingBean emppb = iPagingService.getPagingBean(Integer.parseInt(params.get("page")), cnt, 7, 5);
+		params.put("startCnt", Integer.toString(emppb.getStartCount()));
+		params.put("endCnt", Integer.toString(emppb.getEndCount()));
+		
+		List<HashMap<String, String>> emplist = iEmpService.getEmpList(params);
+		System.out.println("emplist" + emplist);
+		System.out.println("emppb" + emppb);
+		modelMap.put("emplist", emplist);
+		modelMap.put("emppb", emppb);
+	
+		return mapper.writeValueAsString(modelMap);
+	}
+//	고객 등록 셋팅
+	@RequestMapping(value = "/clientAddSetAjax",
+			method = RequestMethod.POST,
+			produces = "test/json;charset=UTF-8")
+	@ResponseBody 
+	public String clientAddSetAjax(@RequestParam HashMap<String, String>params,HttpSession session, ModelAndView modelAndView) throws Throwable{
+		ObjectMapper mapper= new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		params.put("bm_NO",String.valueOf(session.getAttribute("sBmNo")));
+		List<HashMap<String,String>> grade = iClientService.getClientGrade(params);
+		
+		modelMap.put("grade",grade);
+		return mapper.writeValueAsString(modelMap);
+	}
+	//	고객 등록
+	@RequestMapping(value = "/clientWriteAjax",
+			method = RequestMethod.POST,
+			produces = "test/json;charset=UTF-8")
+	@ResponseBody 
+	public String clientWriteAjax(@RequestParam HashMap<String, String>params, ModelAndView modelAndView) throws Throwable{
+		ObjectMapper mapper= new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		try {
+			System.out.println("params =>" +params);
+			/* 고객등록 */
+			iClientService.clientinsertData(params);
+			modelMap.put("res","SUCCESS");
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelMap.put("res", "Failed");
+		}
+		return mapper.writeValueAsString(modelMap);
+	}
+	
+}

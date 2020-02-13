@@ -1,0 +1,286 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>등급 수정</title>
+<c:import url="/header"></c:import>
+<link rel="stylesheet" type="text/css" href="resources/css/grade/grade.css" />
+<script type="text/javascript">
+$(document).ready(function() {
+	
+});
+</script>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">4</c:param>
+	</c:import>
+	<div class="title_area">등급 수정</div>
+	<div class="content_area">
+		<div class="content_btn_area">
+            <div class="content_btn">확인</div>
+        	</div>
+            <div class="grade_srch_area">
+                  <div class="grade_srch_btn">검색</div>
+                  <input type="text" class="grade_srch_txt" placeholder="현재목록 내 검색"/>
+                  <select class="grade_srch_align">
+                  	 <option>전체</option>
+                     <option>등급</option>
+                     <option>회사명</option>
+                     <option>변경일</option>
+                     <option>최근거래일</option>
+                  </select>
+               <input type="text" class="cntPick" value="#개 항목중 #개 선택  "/>
+               </div>
+               <div class="list_wrap">
+         <table class="list_table">
+         	<colgroup>
+				<col width="60">
+				<col width="80">
+				<col width="80">
+				<col width="80">
+				<col width="300">
+				<col width="250">
+				<col width="100">
+				<col width="250">
+			</colgroup>
+            <tr class="grade_list_title">
+               <td class="check"><input type="checkbox" /></td>
+               <td class="title">no</td>
+               <td class="title">현재 등급</td>
+               <td class="title">변경 등급</td>
+               <td class="title">회사명</td>
+               <td class="title">변경일</td>
+               <td class="title">상태</td>
+               <td class="title">최근거래일</td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+            <tr class="grade_list_contents">
+               <td><input type="checkbox" /></td>
+               <td>1</td>
+               <td><input class="grade_name_txt" type="text"
+                  readonly="readonly" value="현재등급명"/></td>
+               <td><select class="grade_edit">
+                     <option class="content_srch_DD1">등급변경</option>
+                     <option>등급명</option>
+                     <option>등급명</option>
+                  </select> </td>
+               <td><input class="company_name_txt" type="text"
+                  readonly="readonly" value="회사명"/></td>
+               <td><input class="edit_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+               <td><input class="stat_txt" type="text"
+                  readonly="readonly" value="진행중"/></td>
+               <td><input class="rec_trade_date_txt" type="text"
+                  readonly="readonly" value="2019.8.27"/></td>
+            </tr>
+         </table>
+         <div class="list_paging_area">
+	        <span class=list_paging_area>
+	            <input type="button" class="btn_paging" value="<<"/>
+	            <input type="button" class="btn_paging" value="<"/>
+	            <input type="button" class="btn_paging_on" value="1"/>
+	            <input type="button" class="btn_paging" value="2"/>
+	            <input type="button" class="btn_paging" value="3"/>
+	            <input type="button" class="btn_paging" value="4"/>
+	            <input type="button" class="btn_paging" value=">"/>
+	            <input type="button" class="btn_paging" value=">>"/>
+	        </span>
+	     </div>
+	     </div>
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>

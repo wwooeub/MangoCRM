@@ -1,0 +1,119 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>연간부서목표_등록</title>
+<c:import url="/header"></c:import>
+<script type="text/javascript">
+//버튼에 한글자씩 추가되면 길이가 10씩 늘어납니다.
+$(document).ready(function() {
+    // Button Auto Sizing
+    $('button').each(function() {
+        if($(this).html().length > 2) {
+            var leng_diff = $(this).html().length - 2;
+            $(this).width($(this).width() + (10 * leng_diff) + "px");  
+        }
+    })
+    $('.content_btn>div').each(function() {
+        if($(this).html().length > 2) {
+            var leng_diff = $(this).html().length - 2;
+            $(this).width($(this).width() + (10 * leng_diff) + "px");  
+        }
+    })
+    $("#cancel").on("click", function(){
+    	history.back();
+    });
+});
+</script>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">23</c:param>
+	</c:import>
+	<div class="title_area">목표 등록</div>
+	<div class="content_area">
+	<!-- 여기에 내용을 구현 -->
+	<div class="contents_wrap">
+		<div class="table_top_area">
+			<div class="top_title_area">
+			</div>
+			<div class="top_btn_area">
+				<div class="btn_yellow btn_size_normal" id="add">등록</div>
+				<div class="btn_yellow btn_size_normal" id="cancel">취소</div>
+			</div>
+		</div>
+			<table class="table_normal">
+				<colgroup>	
+					<col width="10%" />
+					<col width="40%" />
+					<col width="10%" />
+					<col width="40%" />
+				</colgroup>
+				<tr>
+                <td class="field_name first_field_name">
+                    	적요 명<span class="acc_txt">*</span>
+                    </td>
+                    <td class="field_contents" colspan="3">
+                        <input type="text" class=input_normal placeholder="최대 20자 이내"/>
+                    </td>
+                </tr> 
+                <tr>
+                	 <td class="field_name first_field_name">
+                 	       목표매출 <span class="acc_txt">*</span>
+                    </td>
+                   <td class="field_contents" colspan="3">
+                        <input type="text" class="input_normal"/>
+                    </td>
+                </tr>               
+                <tr>
+                <td class="field_name first_field_name">
+                    	기준년도<span class="acc_txt">*</span>
+                    </td>
+                    <td class="field_contents">
+                    <select class="input_normal">
+                            <option selected="selected"></option>
+                        </select>
+                    </td>
+                 	<td class="field_name">
+                    	등록일자
+                    </td>
+                    <td class="field_contents">
+                        <input type="text" class="input_normal" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="field_name first_field_name">
+                    	등록자<span class="acc_txt">*</span>
+                    </td>
+                    <td class="field_contents">
+                        <input type="text" class="input_short" readonly="readonly"/><div class="btn_black btn_size_normal select">선택</div>
+                    </td>
+                    <td class="field_name">
+                 	   	등록자 이메일
+                    </td>
+                    <td class="field_contents">
+                    	<input type="text" class="input_normal" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                	<td class="field_name first_field_name">
+                 	       부서담당자 <span class="acc_txt">*</span>
+                    </td>
+                    <td class="field_contents">
+                        <input type="text" class="input_short" readonly="readonly"/><div class="btn_black btn_size_normal select">선택</div>
+                    </td>
+                    <td class="field_name">
+                 	       부서
+                    </td>
+                    <td class="field_contents">
+                    	<input type="text" class="input_normal" readonly="readonly"/>
+                    </td>
+                </tr>
+			</table>
+	</div>
+	</div>
+</body>
+</html>

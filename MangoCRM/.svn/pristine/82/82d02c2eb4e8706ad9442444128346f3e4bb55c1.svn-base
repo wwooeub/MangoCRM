@@ -1,0 +1,25 @@
+package com.smart.mango.web.inside.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class BssDao implements IBssDao {
+	@Autowired
+	public SqlSession sqlSession;
+
+	@Override
+	public List<HashMap<String, String>> getBssList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("bss.getBssList",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getSuch(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("bss.getSuch",params);
+	}
+
+}

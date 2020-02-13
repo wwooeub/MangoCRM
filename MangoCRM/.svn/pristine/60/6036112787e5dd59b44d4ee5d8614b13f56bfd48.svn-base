@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lead">
+	<select id="getLeadlist" parameterType="hashmap"
+		resultType="hashmap">
+		SELECT *
+		FROM (
+		SELECT L.LEAD_NO AS L_NO, L.LEAD_NAME AS L_NM, C1.CLIENT_NAME AS C1_NM,
+			   C2.COMP_NAME AS C2_NM, CP.CONG_PATH_NAME CP_NM, C1.CLIENT_PH AS PH,
+			   LS.LEAD_STAT_NAME AS LS_NM, E.EMP_NAME AS E_NM, TO_CHAR(L.LEAD_DATE,'YYYY-MM-DD') AS L_DT,
+			   ROW_NUMBER() OVER(ORDER BY L.LEAD_NO DESC) AS RNUM, L.HISTORY_CHK AS L_CHK
+		FROM LEAD L INNER JOIN CLIENT C1
+							ON L.CLIENT_NO = C1.CLIENT_NO
+					INNER JOIN COMP C2
+							ON C1.COMP_NO = C2.COMP_NO
+					INNER JOIN EMP_INFO E
+							ON L.EMP_NO = E.EMP_NO
+					INNER JOIN LEAD_STAT LS
+							ON L.LEAD_STAT_NO = LS.LEAD_STAT_NO
+					INNER JOIN CONG_PATH CP
+							ON L.CONG_PATH_NO = CP.CONG_PATH_NO
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchGbn2 eq 0">
+					AND C1.CLIENT_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn2 eq 1">
+					AND C2.COMP_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn2 eq 2">
+					AND E.EMP_NAME LIKE'%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn2 eq 3">
+					AND LS.LEAD_STAT_NAME LIKE'%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		<if test="searchGbn1 != null">
+			<choose>
+				<when test = "searchGbn1 eq 0">
+					
+				</when>
+				<when test = "searchGbn1 eq 1">
+					AND L.LEAD_DATE LIKE TO_DATE(SYSDATE,'YYYY-MM-DD')
+				</when>
+				<when test = "searchGbn1 eq 2">
+					AND L.HISTORY_CHK = 1
+				</when>
+			</choose>
+		</if>
+		) SQ
+		WHERE SQ.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	<select id="getleadCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*)
+		FROM (
+		SELECT L.LEAD_NO AS L_NO, L.LEAD_NAME AS L_NM, C1.CLIENT_NAME AS C1_NM,
+			   C2.COMP_NAME AS C2_NM, CP.CONG_PATH_NAME CP_NM, C1.CLIENT_PH AS PH,
+			   LS.LEAD_STAT_NAME AS LS_NM, E.EMP_NAME AS E_NM, TO_CHAR(L.LEAD_DATE,'YYYY-MM-DD') AS L_DT,
+			   ROW_NUMBER() OVER(ORDER BY L.LEAD_NO DESC) AS RNUM, L.HISTORY_CHK AS L_CHK
+		FROM LEAD L INNER JOIN CLIENT C1
+							ON L.CLIENT_NO = C1.CLIENT_NO
+					INNER JOIN COMP C2
+							ON C1.COMP_NO = C2.COMP_NO
+					INNER JOIN EMP_INFO E
+							ON L.EMP_NO = E.EMP_NO
+					INNER JOIN LEAD_STAT LS
+							ON L.LEAD_STAT_NO = LS.LEAD_STAT_NO
+					INNER JOIN CONG_PATH CP
+							ON L.CONG_PATH_NO = CP.CONG_PATH_NO
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchGbn2 eq 0">
+					AND C1.CLIENT_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn2 eq 1">
+					AND C2.COMP_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn2 eq 2">
+					AND E.EMP_NAME LIKE'%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn2 eq 3">
+					AND LS.LEAD_STAT_NAME LIKE'%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		<if test="searchGbn1 != null">
+			<choose>
+				<when test = "searchGbn1 eq 0">
+					
+				</when>
+				<when test = "searchGbn1 eq 1">
+					AND L.LEAD_DATE LIKE TO_DATE(SYSDATE,'YYYY-MM-DD')
+				</when>
+				<when test = "searchGbn1 eq 2">
+					AND L.HISTORY_CHK = 1
+				</when>
+			</choose>
+		</if>
+		) SQ
+	</select>
+	<update id="editLs" parameterType="hashmap">
+		UPDATE LEAD SET LEAD_STAT_NO = (SELECT LEAD_STAT_NO
+		                                FROM LEAD_STAT
+		                                WHERE LEAD_STAT_NAME = #{lsNm})
+		WHERE LEAD_NO = {lNo}
+	</update>	
+	<select id = "getclientList" parameterType = "hashmap" resultType = "hashmap">
+		SELECT *
+		FROM(SELECT CLIENT_NO , CLIENT_NAME , COMP_NAME,
+             ROW_NUMBER() OVER(ORDER BY CLIENT_NO ASC) AS RNUM
+     		 FROM CLIENT C INNER JOIN COMP C2
+               		               ON C.COMP_NO = C2.COMP_NO) Z
+            WHERE Z.RNUM BETWEEN 1 AND 10
+        <if test="searchTxt != null and searchTxt != ''">
+        	AND CLIENT_NAME LIKE'%' || #{searchTxt} || '%'
+        </if>
+	</select>
+	<select id = "getpopCnt" parameterType = "hashmap" resultType = "Integer">
+		SELECT COUNT(*)
+		FROM(SELECT CLIENT_NO , CLIENT_NAME , COMP_NAME
+     		 FROM CLIENT C INNER JOIN COMP C2
+               				       ON C.COMP_NO = C2.COMP_NO
+			<if test="searchTxt != null and searchTxt != ''">
+        	AND CLIENT_NAME LIKE'%' || #{searchTxt} || '%'
+        	</if>
+        	) A
+	</select>
+</mapper>

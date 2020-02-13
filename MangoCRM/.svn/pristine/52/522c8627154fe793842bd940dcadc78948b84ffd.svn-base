@@ -1,0 +1,10 @@
+package com.smart.mango.web.out.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+public interface IchCompDao {
+
+	List<HashMap<String, String>> getComp(HashMap<String, String> params) throws Throwable;
+
+}

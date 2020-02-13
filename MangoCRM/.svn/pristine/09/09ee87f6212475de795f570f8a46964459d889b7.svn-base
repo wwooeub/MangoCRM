@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sche">
+	
+	
+	<!--////////////////////////////// 일정 등록,수정,세부사항  /////////////////////////////////-->
+	
+	<!-- 의견 등록 -->
+	<insert id="insertOpin" parameterType="hashmap">
+		INSERT INTO SCHE_OPIN(SCHE_OPIN_NO, EMP_NO, SCHE_NO, SCHE_OPIN_CON)
+		VALUES (SCHE_OPIN_SEQ.NEXTVAL, #{sEmpNo}, 0 , #{sche_opin_con})
+	</insert>
+	
+	<!-- 의견 등록의 댓글 조회 -->
+	<!-- <select id="" parameterType="hashmap" resultType="hashmap">
+		SELECT SCHE_OPIN.SCHE_OPIN_NO, SCHE_OPIN.EMP_NO ,EMP_NAME || ' ' || EMP_POSI_NAME AS EMP,TO_CHAR(SCHE_DATE,'YYYY-MM-DD HH24:MI:SS) AS SCHE_DATE, SCHE_OPIN.SCHE_OPIN_CON
+		FROM SCHE_OPIN INNER JOIN EMP_INFO
+							   ON SCHE_OPIN.EMP_NO = EMP_INFO.EMP_NO
+					   INNER JOIN EMP_POSI
+					   		   ON EMP_INFO.EMP_POSI_NO = EMP_POSI.EMP_POSI_NO
+		WHERE SCHE_OPIN.SCHE_NO = 0 AND SCHE_OPIN.SCHE_OPIN_DEL_YN = 1
+	</select> -->
+	
+	<!--////////////////////////////// 일정 등록,수정,세부사항 end  /////////////////////////////////-->
+	
+	<!--////////////////////////////// 일정 등록  /////////////////////////////////-->
+	
+	<!-- 일정 등록  -->
+	<insert id="insertSche" parameterType="hashmap">
+		INSERT INTO SCHE(SCHE_NO, SCHE_DIV_NO, SCHE_ACTI_NO, SCHE_PLACE, SCHE_CON, SCHE_RES, SCHE_SDATE, 
+		<if test="sche_edate neq null and sche_edate neq ''">
+		SCHE_EDATE, 
+		</if>
+		SCHE_IMPORTANCE, EMP_NO)  
+		VALUES (SCHE_SEQ.NEXTVAL, #{sche_div_no}, #{scheActiNo}
+		<choose>
+		<when test="sche_postcode != '' or sche_addr != '' or sche_det_addr != ''">, 	#{sche_postcode} || ',' ||#{sche_addr} || ',' || #{sche_det_addr}</when>
+		<otherwise>, NULL</otherwise>
+		</choose> 
+		,#{sche_con} 
+		<choose><when test="sche_res != ''">, #{sche_res}</when><otherwise>, NULL</otherwise></choose>
+				,TO_DATE(#{sche_sdate} || ' ' || #{sche_stime}, 'YYYY-MM-DD HH24:MI:SS'),
+				<if test="sche_edate neq null and sche_edate neq ''">
+				TO_DATE(#{sche_edate} || ' ' || #{sche_etime}, 'YYYY-MM-DD HH24:MI:SS'),
+				</if>
+				 #{scheImportance}, #{sEmpNo})
+	</insert>
+	
+	<!--///////////////////////////// 일정 등록end  //////////////////////////////-->
+	
+</mapper>

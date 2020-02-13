@@ -1,0 +1,15 @@
+package com.smart.mango.web.inside.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smart.mango.web.common.dao.ICommonDao;
+import com.smart.mango.web.inside.dao.IProdDao;
+
+@Service
+public class ProdService implements IProdService{
+	@Autowired
+	public IProdDao iprodDao;
+	@Autowired
+	public ICommonDao iCommonDao;
+}

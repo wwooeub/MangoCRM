@@ -1,0 +1,214 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/*
+  버튼은 float:right을 썼기때문에 반대로 적어주세요.
+*/
+.srch {
+	display: table;
+	width: 80px;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 10pt;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #595959;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-weight: bold;
+}
+/*버튼의 hover입니다.*/
+.srch:hover {
+	background-color: #292929;
+	cursor: pointer;
+}
+.content_srch_txt {
+	display: inline-block;
+	width: 200px;
+	height: 25px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	float: right;
+	border-radius: 5px;
+}
+.content_srch_btn {
+	display: inline-block;
+	width: 940px;
+	height: 50px;
+	margin-bottom: 10px;
+}
+.content_srch_DD {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	font-size: 10pt;
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	float: right;
+}
+.content_srch_DD:hover {
+	cursor: pointer;
+}
+.srch_add:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+/* 리드 카드보기 가운데부분  */
+.bss_mid {
+	width: 1200px;
+	height: 700px;
+}
+/* Unqualified, New, Working, Nurturing, Conversion 단계별 */
+.bss_mid_stat {
+	display: inline-block;
+	width: 225px;
+	height: 100%;
+	vertical-align: top;
+	text-align: center;
+}
+.bss_mid_stat_title {
+	display: inline-block;
+	width: 180px;
+	line-height: 40px;
+	border-radius: 3px;
+	background-color: #F2CB07;
+	vertical-align: middle;
+	color: #595959;
+	font-size: 10pt;
+	font-weight: bold;
+}
+/* 카드 내부 */
+.bss_card {
+	display: inline-block;
+	width: 180px;
+	height: 100px;
+	background-color: #FFFFFF;
+	border: 1px solid #d0d0d0;
+	border-radius: 3px;
+	margin-top: 10px;
+	text-align: left;
+	padding: 5pt 3pt;
+	
+}
+.bss_card:hover {
+	box-shadow: 1px 1px 8px #c8c8c8;
+	cursor: pointer;
+}
+/* 카드 내부 리드 이름 */
+.bss_card_name {
+	display: inline-block;
+	width: 80%;
+	height: auto;
+	color: #F2B807;
+	padding-left: 5px;
+	font-size: 12pt;
+	font-weight: bold;
+	vertical-align: top;
+	margin-bottom: 10px;
+}
+/* 회사명, 전화번호 */
+.bss_card_manager, .bss_card_progdate, .bss_card_company
+	{
+	font-size: 10pt;
+	text-indent: 5pt;
+	color: #000000;
+	margin-bottom: 5px;
+}
+/* 수직 구분선 */
+.vertical_line {
+	display: inline-block;
+	width: 1px;
+	height: 100%;
+	background-color: #d0d0d0;
+	border: 0px solid #000000;
+	border-radius: 1px;
+	margin-top: 30px;
+}
+.srch_text {
+	padding: 0px;
+	border-width: 0.1px;
+}
+.srch_cld {
+	width: 30px;
+	height: 50px;
+	background-color: #FFFFFF;
+	float: right;
+	text-align: center;
+}
+.srch_cld>img {
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+}
+</style>
+<c:import url="/header"></c:import>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">20</c:param>
+	</c:import>
+	<div class="title_area">영업관리</div>
+	<div class="content_area">
+		<!-- 여기에 내용을 구현 -->
+		<div class="content_srch_btn">
+			<div class="srch">검색</div>
+			<input type="text" class="content_srch_txt" /> <select
+				class="content_srch_DD">
+				<option selected="selected">선택</option>
+				<option>기업명</option>
+				<option>담당자</option>
+			</select>
+		</div>
+		<div class="bss_mid">
+			<!-- 수직 구분선 -->
+			<div class="vertical_line"></div>
+			<!-- 진행도 영역 시작 -->
+			<div class="bss_mid_stat">
+				<div class="bss_mid_stat_title">영업기회</div>
+				<!-- 리드 카드 형식  -->
+				<div class="bss_card">
+				<c:forEach var="data" items="${list}">
+					<div class="bss_card_name_title">
+						<div class="bss_card_name">${data.CHN_NAME}</div>
+					</div>
+					<div class="bss_card_company">기업명 :</div>
+					<div class="bss_card_manager">담당자 :</div>
+					<div class="bss_card_progdate">진행일자 :</div>
+				</c:forEach>
+				</div>
+				<!-- 리드 카드 형식 끝  -->
+			</div>
+			<!-- 진행도 영역 끝 -->
+			<div class="vertical_line"></div>
+			<!-- New 단계 -->
+			<div class="bss_mid_stat">
+				<div class="bss_mid_stat_title">영업제안</div>
+			</div>
+			<div class="vertical_line"></div>
+			<!-- Working 단계 -->
+			<div class="bss_mid_stat">
+				<div class="bss_mid_stat_title">영업협상</div>
+			</div>
+			<div class="vertical_line"></div>
+			<!-- Nurturing 단계 -->
+			<div class="bss_mid_stat">
+				<div class="bss_mid_stat_title">영업계약</div>
+			</div>
+			<div class="vertical_line"></div>
+
+		</div>
+	</div>
+</body>
+</html>

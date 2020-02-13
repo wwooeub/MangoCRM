@@ -1,0 +1,56 @@
+package com.smart.mango.web.inside.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smart.mango.web.common.dao.ICommonDao;
+import com.smart.mango.web.inside.dao.IClientDao;
+
+@Service
+public class ClientService implements IClientService {
+	@Autowired
+	public IClientDao iClientDao;
+	
+	@Autowired
+	public ICommonDao iCommonDao;
+	
+	
+	/* 고객 등록 */
+	@Override
+	public void clientinsertData(HashMap<String, String> params) throws Throwable {
+		iClientDao.clientinsertData(params);
+	}
+
+
+	@Override
+	public List<HashMap<String, String>> getClientGrade(HashMap<String, String> params) throws Throwable {
+		return iClientDao.getClientGrade(params);
+	}
+
+
+	@Override
+	public int getEmpCnt(HashMap<String, String> params) throws Throwable {
+		return iClientDao.getEmpCnt(params);
+	}
+
+
+	@Override
+	public List<HashMap<String, String>> getEmpList(HashMap<String, String> params) throws Throwable {
+		return iClientDao.getEmpList(params);
+	}
+
+
+	@Override
+	public int getCompCnt(HashMap<String, String> params) throws Throwable {
+		return iClientDao.getCompCnt(params);
+	}
+
+
+	@Override
+	public List<HashMap<String, String>> getCompList(HashMap<String, String> params) throws Throwable {
+		return iClientDao.getCompList(params);
+	}
+}

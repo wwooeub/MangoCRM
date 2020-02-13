@@ -1,0 +1,509 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>리드</title>
+<style type="text/css">
+* {
+	box-sizing: border-box;
+	font-family: 'Gothic A1', sans-serif;
+}
+/* 테이블 영역 */
+.content_table {
+	width: 1080px;
+	border: 0px;
+	vertical-align: top;
+}
+
+th {
+	font-size: 10pt;
+}
+/*버튼영역*/
+.content_btn_area {
+	width: 1080px;
+	height: 50px;
+}
+/*버튼을 div로 만들었습니다.
+  버튼 속성입니다.
+  버튼 영역 내에 있는 버튼의 속성
+*/
+.content_btn_area>div {
+	display: table;
+	width: 80px;
+	height: 30px;
+	font-size: 10pt;
+	color: #595959;
+	text-align: center;
+	border-radius: 5px;
+	float: right;
+	background-color: #F2B807;
+	margin-top: 10px;
+	margin-left: 10px;
+	vertical-align: middle;
+	line-height: 30px;
+}
+/*버튼의 hover입니다.
+버튼 영역 내에 있는 버튼의 hover효과*/
+.content_btn_area>div:hover {
+	background-color: #F2CB07;
+	cursor: pointer;
+}
+/* 버튼 사이의 간격을 만들기위한 속성 */
+.btn {
+	margin-right: 10px;
+}
+/*테이블 속성입니다.*/
+table {
+	width: 1080px;
+	border-collapse: collapse; /* 셀 테두리 합치기 */
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+	font-size: 10pt;
+	border-top: 2px solid #F2CB07;
+}
+
+tr {
+	border-bottom: 1px solid #CCC;
+}
+/*제목.*/
+th {
+	background-color: #EEEEEE;
+	border-right: 1px solid #CCC;
+	padding: 0px;
+}
+/*내용.*/
+td {
+	padding: 10px 15px;
+}
+/*내용열에 들어가는 텍스트 박스의 속성입니다.
+  기본적으로 내용열에 텍스트박스만 있을때 쓰는 속성입니다.
+*/
+.table_txt {
+	padding-left: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 14px;
+	outline: none;
+	text-align: left;
+}
+/*내용열에 텍스트박스와 버튼이 같이 들어갈 경우 사용하는 속성입니다.*/
+.table_txt1 {
+	display: inline-block;
+	vertical-align: top;
+	/*버튼과 같이해서 width를 조절해주세요.*/
+	width: 80%;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 14px;
+	outline: none;
+}
+/*여러열이 변동이 되면  txt1, txt2같이 표시해주세요.*/
+.table_txt2 {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 14px;
+	outline: none;
+}
+/* 주소영역 반쪽자리 텍스트박스 */
+.table_txt3 {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 14px;
+	outline: none;
+}
+/* 상세정보 텍스트박스 */
+.table_txt4 {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: 105px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 14px;
+	outline: none;
+}
+/* height값을 자동으로 잡음 */
+.tr_address {
+	height: auto;
+}
+/* 테이블 내 인풋기본 사이즈 */
+.input_size_normal {
+	width: 100%;
+	height: 35px;
+	border-radius: 4px;
+}
+/* 테이블 내 인풋스타일 기본 */
+.input_style_normal {
+	font-size: 10pt;
+	text-indent: 5px;
+	border: 1px solid #cacaca;
+	padding: 0px;
+}
+/* 주소영역 인풋타입 아래 간격 조절 */
+.tr_address>td>input {
+	margin-bottom: 10px;
+}
+/* readonly속성 배경색상 */
+.is_read_only {
+	background-color: #e0e0e0;
+}
+/*내용열에 들어가는 버튼의 속성입니다.*/
+.text_btn {
+	display: inline-block;
+	width: 55px;
+	height: 35px;
+	margin-left: 10px;
+	border: 0px;
+	background-color: #595959;
+	color: #F2F2F2;
+	border-radius: 5px;
+}
+
+.text_btn:hover {
+	background-color: #F2CB07;
+	color: #595959;
+	cursor: pointer;
+}
+/* *중요표시 글씨속성 */
+.acc_txt {
+	color: #ff3737;
+	font-weight: 800;
+}
+/* 빨간색 버튼 */
+.btn_red {
+	display: inline-block;
+	margin-left: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 3px;
+	background-color: #ff2f2f;
+	border: 1px solid #ff4d4d;
+	color: #ffffff;
+	font-size: 10pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+/* 정사각형 버튼 크기 - 취소 아이콘 버튼으로 활용 */
+.btn_size_sqr {
+	width: 20px;
+	height: 20px;
+	margin-left: 0px;
+}
+/* 첨부파일 영역 */
+.attach_area {
+	margin-top: 60px;
+	width: 1080px;
+	border: 0px;
+	font-size: 15px;
+	vertical-align: top;
+}
+
+.attach_area>table {
+	border-collapse: collapse;
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+	font-size: 15px;
+	border-top: 2px solid #F2CB07;
+	border-bottom: 2px solid #F2CB07;
+	width: 1080px;
+}
+
+.attach_area>table tr {
+	border-bottom: 1px solid #CCC;
+}
+
+.attach_area>table td {
+	font-size: 15px;
+}
+/* 첨부파일 제목 */
+.attach_title_txt {
+	display: inline-block;
+	padding: 5px;
+	color: #272727;
+	font-weight: bold;
+	font-size: 15pt;
+	line-height: 40px;
+}
+
+.attach_img {
+	display: inline-block;
+	vertical-align: top;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+/* 필드 내용 */
+.field_icon_contents {
+	padding: 10px 15px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.trash_img {
+	cursor: pointer;
+}
+/* 필드 내용이되 정렬은 가운데로 하고싶을때 */
+.contents_align_center {
+	text-align: center;
+}
+</style>
+<c:import url="/header"></c:import>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#reg_cancel_Btn").on("click", function(){
+		history.back();
+	});
+	$("#client_Btn").on("click", function(){
+		html = "";
+		html += "<form action = \"#\" id = \"srchForm\" method = \"post\">"
+// 		html += "<input type = \"hidden\" id = \"searchTxt\" name = \"searchTxt\"/>"
+		html += "</form>";
+		html += "<div>";
+		html += "<input type = \"text\" class = \"input_address2\" id=\"txt_client_search\" placeholder = \"Ex)구디아카데미\"/>";
+		html += "<img src = \"resources/images/Lead/icon_search_gray.png\" alt = \"\" width = \"30px\" class = \"address_search_icon\">";
+		html += "<img src = \"resources/images/Lead/icon_cancel_gray.png\" alt = \"\" width = \"20px\" class = \"address_search_cancel\">";
+		html += "</div>";
+		html += "<table class = \"pop_table\" style=\"width: 100%; height : auto; position : relative; top : -20px; border-top:0px;\">";
+		html += "<colgroup><col width=\"20%\" /><col width=\"40%\" /><col width=\"40%\" /></colgroup>";
+		html += "<thead>";
+		html += "<tr class = \"search_pop_title\">";
+		html += "<td>고객번호</td>";
+		html += "<td>고객이름</td>";
+		html += "<td>고객사</td>";
+		html += "</tr>";
+		html += "</thead>";
+		html += "<tbody class = \"search_pop_tbody\">";
+		html += "</tbody>";
+		html += "</table>";
+		html += "<div class = \"list_paging_area\" style = \"margin-top : 4px !important;\"></div>";
+		
+		makeNoBtnPopup(7, "고객검색 팝업", html , true, 500, 600, function() {
+			reloadList();
+		});
+		$(".address_search_icon").on("click", function(){
+			$txt_client_search = $("#txt_client_search").val();
+			$("#searchTxt").val($txt_client_search);
+			console.log($("#searchTxt").val());
+			reloadList();
+		});
+				
+	});
+	
+	function reloadList() {
+		var params = $("#popForm").serialize();
+		$.ajax({
+			type : "post",
+			url : "leadpopAjax",
+			dataType : "json",
+			data : params,
+
+			success : function(result) {
+				redrawList(result.pop);
+				redrawPaging(result.pb);
+			},
+			error : function(request, status, error) {
+				console.log("text : " + request.responseText);
+				console.log("error : " + error);
+			}
+		});
+	}
+	function redrawList(pop) {
+		if (pop.length != 0) {
+			var html = "";
+			var lsize = 7 - pop.length;
+			
+			for ( var i in pop) {
+				html += "<tr>";
+				html += "<td>"+pop[i].CLIENT_NO+"</td>";
+				html += "<td>"+pop[i].CLIENT_NAME+"</td>";
+				html += "<td>"+pop[i].COMP_NAME+"</td>";
+				html += "</tr>";
+			}	
+			for(var j = 0; j < lsize; j++){
+				html += "<tr>";
+				html += "</tr>";
+			}
+		} 
+		
+		$(".search_pop_tbody").html(html);
+	}
+	
+	function redrawPaging(pb){
+		var html = "";
+		//처음
+		html += "<div class = \"btn_paging\" name=\"1\">&lt;&lt;</div>&nbsp;";
+		//이전
+		if($("#page").val() == "1"){
+		html += "<div class = \"btn_paging\" name=\"1\">&lt;</div>&nbsp;";
+		}
+		else{
+			html += "<div class = \"btn_paging\" name=\"" + ($("#page").val() * 1 - 1) + "\">$lt</div>&nbsp;";			
+		}
+		//숫자
+		for(var i = pb.startPcount ; i <= pb.endPcount; i++){
+			if($("#page").val() == i){
+				html += "<div class = \"btn_paging\"><b>"+ i +"</b></div>&nbsp;";	
+			}
+			else{
+				html += "<div class = \"btn_paging\" name=\"" + i + "\">"+ i + "</div>&nbsp;";	
+			}
+		}
+		//다음
+		if($("#page").val() == pb.maxPcount){
+		html += "<div class = \"btn_paging\" name=\"" + pb.maxPcount + "\">&gt;</div>&nbsp;";
+		}
+		else{
+			html += "<div class = \"btn_paging\" name=\"" + ($("#page").val() * 1 + 1) + "\">다음</div>&nbsp;";			
+		}
+		
+		//마지막
+		html += "<div class = \"btn_paging\" name = \"" + pb.maxPcount + "\">&gt;&gt</div>";
+		
+		$(".list_paging_area").html(html);
+	}
+	
+});
+
+
+</script>
+</head>
+<body>
+	<form action="#" id="popForm" method="post">
+		<input type="hidden" id="page" name="page" value="1"> 
+		<input type="hidden" id="searchTxt" name="searchTxt" /> 
+		<input type="hidden" id="no" name="no"> 
+<!-- 		<input type="hidden" id="cl_nm" name="cl_nm"> -->
+	</form>
+	<c:import url="/topLeft"></c:import>
+	<div class="title_area">리드 등록</div>
+	<div class="content_area">
+		<div class="contents_wrap">
+			<!-- 버튼영역 -->
+			<div class="content_btn_area">
+				<!-- 버튼-->
+				<div id="reg_cancel_Btn" class="btn">취소</div>
+				<div class="btn">등록</div>
+			</div>
+			<!-- 테이블 영역입니다. -->
+			<div class="content_table">
+				<table>
+					<colgroup>
+						<!-- 테이블열들의 너비입니다. -->
+						<col width="10%" />
+						<col width="40%" />
+						<col width="10%" />
+						<col width="40%" />
+					</colgroup>
+					<tr>
+						<th>리드명<span class="acc_txt">*</span></th>
+						<td><input type="text" class="table_txt" /></td>
+
+						<th>고객명<span class="acc_txt">*</span></th>
+						<td><input type="text" class="table_txt1" readonly="readonly" />
+							<input type="button" id="client_Btn" class="text_btn" value="검색" /></td>
+					</tr>
+					<tr>
+						<th>리드상태</th>
+						<td><select class="input_style_normal input_size_normal">
+								<option selected="selected">Unqualified</option>
+								<option>New</option>
+								<option>Working</option>
+								<option>Nurturing</option>
+								<option>Conversion</option>
+						</select></td>
+						<th>고객사<span class="acc_txt">*</span></th>
+						<td><input type="text" class="table_txt" readonly="readonly" />
+						</td>
+					</tr>
+					<tr>
+						<th>인지경로</th>
+						<td><select class="input_style_normal input_size_normal">
+								<option selected="selected">지인추천</option>
+								<option>웹검색</option>
+								<option>광고</option>
+								<option>기타</option>
+						</select></td>
+						<th>담당자<span class="acc_txt">*</span></th>
+						<td><input type="text" class="table_txt1" readonly="readonly" />
+							<input type="button" id="emp_Btn" class="text_btn" value="검색" />
+						</td>
+					</tr>
+					<!-- 주소영역 -->
+					<tr class="tr_address">
+						<th>주소<span class="acc_txt">*</span></th>
+						<td colspan="3"><input type="text"
+							class="table_txt3 is_read_only" readonly="readonly" />
+							<button class="text_btn btn">검색</button> <input type="text"
+							class="table_txt2 is_read_only" readonly="readonly" /> <input
+							type="text" class="table_txt2" /></td>
+					</tr>
+				</table>
+			</div>
+			<!-- 첨부파일 영역 -->
+			<div class="attach_area">
+				<div class="attach_title_txt">
+					첨부파일 <img class="attach_img"
+						src="resources/images/Lead/uploadimg.png" id="img_attach"
+						alt="uploadimg" />
+				</div>
+				<table>
+					<colgroup>
+						<!--  테이블열들의 너비입니다. -->
+						<col width="15%" />
+						<col width="75%" />
+						<col width="10%" />
+					</colgroup>
+					<tr>
+						<td>첨부자료</td>
+						<td>2019-09-05 이성준.pdf</td>
+						<td class="field_icon_contents"><img class="trash_img"
+							src="resources/images/Lead/icon_del_white.png" alt="" /></td>
+					</tr>
+					<tr>
+						<td>첨부자료</td>
+						<td>2019-09-05 이성준.pdf</td>
+						<td class="field_icon_contents"><img class="trash_img"
+							src="resources/images/Lead/icon_del_white.png" alt="" /></td>
+					</tr>
+					<tr>
+						<td>첨부자료</td>
+						<td>2019-09-05 이성준.pdf</td>
+						<td class="field_icon_contents"><img class="trash_img"
+							src="resources/images/Lead/icon_del_white.png" alt="" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>

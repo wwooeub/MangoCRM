@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회사등급 수정</title>
+<c:import url="/header"></c:import>
+<link rel="stylesheet" type="text/css" href="resources/css/grade/grade.css" />
+<script type="text/javascript">
+var no;
+$(document).ready(function() {
+	reloadGrade();
+	
+	$(".edit_table").on("click", ".grade_color_btn", function() {
+		no = $(this).attr("id");
+		$(".palette").css("visibility", "visible");
+		$(".palette").css("top", $(this).offset().top - 100);
+		
+	});
+	
+	$("html").on("click", function(e) {
+		if($(e.target).attr("class") != "grade_color_btn") {
+			$(".palette").css("visibility", "hidden");
+		}
+	});
+	
+	$(".palette").on("click", "div", function(e) {
+		$("#"+no).css("background-color", $(this).css("background-color"));
+	});
+});
+
+function reloadGrade() {
+	$.ajax({
+		type: "post",
+		url: "getGradeAjax",
+		dataType: "json",
+		success: function(result) {
+			redrawGrade(result.grade);
+		}
+	});
+}
+
+function redrawGrade(grade) {
+	var html = "";
+	
+	for(var i in grade){
+		html += "<tr class=\"grade_list_contents\">";
+		html += "<td class=\"grade_rank\">1</td>";
+		html += "<td>" + grade[i].GRADE_NAME + "</td>";
+		html += "<td><input class=\"grade_name_edit\" type=\"text\" maxlength=\"20\"/></td>";
+		html += "<td><div class=\"grade_color_btn\" id=\"" + grade[i].GRADE_NO + "\" style=\"background-color:" + grade[i].GRADE_COLOR + "\"></div></td>";
+		html += "</tr>";
+	}
+	
+	$(".edit_table").children("tbody").html(html);
+}
+</script>
+</head>
+<body>
+	<c:import url="/topLeft">
+		<c:param name="menuNo">4</c:param>
+	</c:import>
+	<div class="title_area">회사등급 수정</div>
+	<div class="content_area">
+		<div class="edit_btn_area">
+	        <div class="edit_btn">확인</div>
+	        <div class="grade_del_btn">삭제</div>
+	        <div class="grade_add_btn">추가</div>
+		</div>
+		<table class="edit_table">
+			<colgroup>
+				<col width="100">
+				<col width="300">
+				<col width="500">
+				<col width="200">
+			</colgroup>
+			<thead>
+				<tr class="grade_list_title">
+	               <td class="title">순위</td>
+	               <td class="title">현재 등급명</td>
+	               <td class="title">변경할 등급명</td>
+	               <td class="title">등급색</td>
+	            </tr>
+            </thead>
+			<tbody>
+				<!-- <tr class="grade_list_contents">
+					<td class="grade_rank">1</td>
+					<td>등급명</td>
+					<td><input class="grade_name_edit" type="text" maxlength="20"/></td>
+					<td><div class="grade1_color_btn"></div></td>
+				</tr> -->
+			</tbody>
+		</table>
+		<div class="palette">
+			<div class="color1"></div>
+			<div class="color2"></div>
+			<div class="color3"></div>
+			<div class="color4"></div>
+			<div class="color5"></div>
+			<div class="color6"></div>
+			<div class="color7"></div>
+			<div class="color8"></div>
+			<div class="color9"></div>
+			<div class="color10"></div>
+			<div class="color11"></div>
+			<div class="color12"></div>
+		</div>
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>

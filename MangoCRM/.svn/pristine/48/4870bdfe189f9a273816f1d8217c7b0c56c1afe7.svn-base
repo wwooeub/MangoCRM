@@ -1,0 +1,187 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>캠페인 목록</title>
+<link rel="stylesheet" type="text/css" href="resources/css/cmp/cmpList.css" />
+
+<c:import url="/header"></c:import>
+</head>
+
+<body>
+<c:import url="/topLeft">
+		<c:param name="menuNo">10</c:param>
+	</c:import>
+	<div class="title_area">캠페인 목록</div>
+	<div class="content_area">
+		<div class="contents_wrap">
+		
+		<div class="write_btn">
+            
+            <div>글쓰기</div>
+            
+         </div>
+         <div class="search_srch">
+            <div class="search_srch_btn">
+                  <div>검색</div>
+                  <input type="text" class="textbox_srch_txt"/>
+                  <select class="dropmenu_srch_DD">
+                     <option class="dropmenu_srch_DD1">00캠페인</option>
+                     <option>나중순</option>
+                     <option>입맛별로</option>
+                  </select>   
+
+               </div>
+             </div>
+
+		 <table>
+            <tr class="title_1">
+             
+               <td class="table_title1">일련번호</td>
+               <td class="table_title2">캠페인명</td>
+               <td class="table_title3">진행기간</td>
+               <td class="table_title4">진행상태</td>
+               <td class="table_title5">담당자</td>
+            </tr>
+            <tr class="title_2">
+
+               <td>1</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+
+            </tr>
+            <tr class="sample_2">
+
+               <td>2</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+          
+            </tr>
+            <tr class="sample_2">
+
+               <td>3</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+            
+            </tr>
+              <tr class="sample_2">
+
+               <td>4</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+               
+            </tr>
+              <tr class="sample_2">
+
+               <td>5</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+              
+            </tr>
+              <tr class="sample_2">
+
+               <td>6</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+              
+            </tr>
+              <tr class="sample_2">
+
+               <td>7</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+              
+            </tr>
+              <tr class="sample_2">
+
+               <td>8</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+               
+            </tr>
+              <tr class="sample_2">
+
+               <td>9</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+              
+            </tr>
+            <tr class="sample_2">
+
+               <td>10</td>
+               <td><input class="sample1_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample2_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample3_txt" type="text"
+                  readonly="readonly" /></td>
+               <td><input class="sample4_txt" type="text"
+                  readonly="readonly" /></td>
+              
+            </tr>
+            
+         </table>
+			
+		</div>
+					<div class="paging_area"></div>
+	</div>
+	<c:import url="/bottom"></c:import>
+</body>
+</html>
